@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MVC</title>
+    <link rel="shortcut icon" href="data:image/jpeg;base64,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" type="image/x-icon">
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container pt-4">
+      <div class="row">
+        <div class="col-12">
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#ProfileControllerModal">ProfileController.php</a>
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#indexModal">index.blade.php</a>
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#editModal">edit.blade.php</a>
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#webModal">web.php</a>
+<!-- ProfileController -->
+<div class="modal fade" id="ProfileControllerModal" tabindex="-1" aria-labelledby="ProfileControllerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ProfileControllerModalLabel">ProfileController</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <textarea cols="200" rows="20" class="form-control">
+
+use Illuminate\Support\Facades\File;
+use Image;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Profile;
+
+class ProfileController extends Controller
+{
+    public function index(){
+        $all_data = Profile::select('*')->orderBy('id', 'DESC')->get();                                                   
+        return view('admin.profile.index',compact('all_data'));
+    } 
+    public function store(Request $request){
+        $all_data = new Profile;                                                
+        $all_data ->name = $request->name; 
+        $all_data ->detail = $request->detail; 
+        $all_data ->gender = $request->gender; 
+        $all_data ->hobbies = json_encode($request->hobbies); 
+        $all_data ->profession = $request->profession; 
+        if($request->hasfile('image')){
+            $file = $request->file('image');
+            // $name = $file->getClientOriginalName();
+            $name = date('YmdHis').".".$file->getClientOriginalExtension();
+            $path = public_path('/images/profile');
+            $img = Image::make($file->path());
+            $img->resize(100, 100)->save($path.'/'.$name);
+            $all_data->image = $name;
+        }                                              
+        $all_data->save();                                  
+        return redirect()->back()->with('success', 'Added Successfully Done');
+    } 
+    public function edit($id){
+        $data = Profile::find($id);                                          
+        return view('admin.profile.edit', compact('data'));
+    } 
+    public function update(Request $request, $id){
+        $data = Profile::find($id);                           
+        $data->name = $request->name;                             
+        $data->detail = $request->detail;                             
+        $data->gender = $request->gender;                             
+        $data->hobbies = json_encode($request->hobbies);                             
+        $data->profession = $request->profession;                            
+        if($request->hasfile('image')){
+            $destination = 'images/profile/'.$data->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file=$request->file('image');
+            //$name=$file->getClientOriginalName();
+            $name=date('YmdHis').".".$file->getClientOriginalExtension();
+            $path = public_path('/images/profile');
+            $img = Image::make($file->path());
+            $img->resize(100, 100)->save($path.'/'.$name);
+            $data->image = $name;
+        }                                                         
+        $data->update();                                            
+        return redirect()->to('/')->with('success', 'Updated Successfully Done');  
+    } 
+    
+    public function delete($id){
+        $data = Profile::find($id);
+        $destination = 'images/profile/'.$data->image;
+        if(File::exists($destination)){ File::delete($destination); }                    
+        $data->delete();                                     
+        return redirect()->back()->with('error', 'Deleted Successfully Done');
+    }  
+}
+
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- index -->
+<div class="modal fade" id="indexModal" tabindex="-1" aria-labelledby="indexModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="indexModalLabel">index</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <textarea cols="200" rows="20" class="form-control">
+
+@extends('layouts.backend')
+
+@section('css')
+
+    <!--toastr css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--myDataTables-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" />
+
+@endsection
+
+@section('content')
+
+    <section>                
+        <div class="container-fluid">
+            <div class="row py-2">
+                <div class="col-8">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb pt-2">
+                          <li class="breadcrumb-item"><a href="{{url('/')}}" class="text-decoration-none">Dashboard</a></li>
+                          <li class="breadcrumb-item active">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-4 text-end">
+                    <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateModal">Create</a>
+                </div>
+                <!-- Create -->
+                <div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="CreateModalLabel">Create</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{url('/admin/profile/store')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 pb-2">
+                                                <label class="fw-bold">Name : </label>
+                                                <input type="text" name="name" class="form-control my-2">
+                                            </div>
+                                            <div class="col-12 pb-2">
+                                                <label class="fw-bold">Image : </label>
+                                                <input type="file" name="image" class="form-control my-2">
+                                            </div>
+                                            <div class="col-12 pb-2">
+                                                <label class="fw-bold">Detail : </label>
+                                                <textareas name="detail" id="editor" cols="30" rows="3" class="form-control my-2"></textareas>
+                                            </div>
+                                            <div class="col-12 pb-2">
+                                                <label class="fw-bold">Gender : </label>
+                                                <div class="form-check pt-2">
+                                                    <input class="form-check-input" type="radio" name="gender" value="Male" id="Male">
+                                                    <label class="form-check-label" for="Male">Male</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender" value="Female" id="Female">
+                                                    <label class="form-check-label" for="Female">Female</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender" value="Others" id="Others">
+                                                    <label class="form-check-label" for="Others">Others</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 pb-2">
+                                                <label class="fw-bold">Hobbies : </label>                                              
+                                                <div class="form-check pt-2">
+                                                    <input class="form-check-input" type="checkbox" name="hobbies[]" value="Playing" id="Playing">
+                                                    <label class="form-check-label" for="Playing">Playing</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="hobbies[]" value="Drwing" id="Drwing">
+                                                    <label class="form-check-label" for="Drwing">Drwing</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 pb-2">
+                                                <label class="fw-bold">Profession : </label>
+                                                <select name="profession" class="form-select" aria-label="Default select example">
+                                                    <option hidden selected value="">Choose</option>
+                                                    <option value="Student">Student</option>
+                                                    <option value="Business">Business</option>
+                                                    <option value="Job">Job</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </form>  
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <style>
+                                .armanTableContainer{
+                                    width: 100% !important;
+                                    max-height: fit-content !important;
+                                }
+                                .armanTableFixed{
+                                    overflow-x: scroll !important;
+                                    overflow-y: scroll !important;
+                                    height: fit-content !important;
+                                    height: 80vh !important;
+                                }
+                                .armanTable{
+                                    min-width: max-content !important;
+                                    border-collapse: separate !important;
+                                    font-size:14px !important;
+                                }
+                                .armanTable th{
+                                    position: sticky !important;
+                                    top: 0px !important;
+                                    background-color: white !important;
+                                }
+                            </style>
+                            <div class="armanTableContainer bg-white rounded">
+                                <div class="table-responsive armanTableFixed">
+                                    <table id="myDataTables" class="armanTable table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-center">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col" class="text-center">Image</th>
+                                            <th scope="col">Detail</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Hobbies</th>
+                                            <th scope="col">Profession</th>
+                                            <th scope="col" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        @foreach($all_data as $data)
+
+                                        <tr>
+                                            <td class="pt-3 text-center">{{$loop->index+1}}</td>
+                                            <td class="pt-3">{{$data->name}}</td>
+                                            <td class="text-center"><img src="{{asset('/images/profile/'.$data->image)}}" alt="Image Here" class="img-fluid"></td>
+                                            <td class="pt-3">{!!$data->detail!!}</td>
+                                            <td class="pt-3">{{$data->gender}}</td>
+                                            <td class="pt-3">
+                                                    @php $hobby_show = json_decode($data->hobbies); @endphp
+                                                    @if(!is_null($hobby_show))
+                                                        @foreach($hobby_show as $hobby) 
+                                                            {{$hobby}}, 
+                                                        @endforeach
+                                                    @endif
+                                            </td>
+                                            <td class="pt-3">{{$data->profession}}</td>
+                                            <td class="text-center">
+                                                <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Show{{$data->id}}Modal">Show</a>
+                                                <a href="{{url('/admin/profile/edit',$data->id)}}" class="btn btn-success">Edit</a>
+                                                <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Delete{{$data->id}}Modal">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Show -->
+                                        <div class="modal fade" id="Show{{$data->id}}Modal" tabindex="-1" aria-labelledby="Show{{$data->id}}ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="Show{{$data->id}}ModalLabel">Show</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-12 pb-2 text-center">
+                                                                    <h4></h4>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div> 
+
+                                        <!-- Delete -->
+                                        <div class="modal fade" id="Delete{{$data->id}}Modal" tabindex="-1" aria-labelledby="Delete{{$data->id}}ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="Delete{{$data->id}}ModalLabel">Delete</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-12 pb-2 text-center text-danger">
+                                                                    <h3>Are you sure ?</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <a href="{{url('/admin/profile/delete',$data->id)}}" class="btn btn-danger">Delete</a>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div> 
+
+                                        @endforeach
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+@endsection                                                  
+
+@section('js')
+
+    <!--ajax js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--toastr js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if(Session::has('success'))
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true,
+            }
+            toastr.success("{{ session('success')}}")
+        @endif
+        @if(Session::has('warning'))
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true,
+            }
+            toastr.warning("{{ session('warning')}}")
+        @endif
+        @if(Session::has('error'))
+            toastr.options={
+                "closeButton":true,
+                "progressBar":true,
+            }
+            toastr.error("{{ session('error')}}")
+        @endif
+    </script>
+
+    <!--myDataTables-->
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready( function () {
+        $('#myDataTables').DataTable();
+    } );
+    </script>
+
+    <!-- editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector('#editor'))
+            .catch( error => { console.error( error ); } );
+    </script>
+
+@endsection 
+ 
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalLabel">edit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <textarea cols="200" rows="20" class="form-control">
+
+@extends('layouts.backend')
+
+@section('css')
+
+@endsection
+
+@section('content')
+
+@php $hobby = json_decode($data->hobbies); @endphp
+
+    <section>
+        <div class="container pb-2">
+            <div class="row">
+                <div class="col-12 text-end py-2">
+                    <a href="{{url('/')}}" class="btn btn-primary">Back</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card p-2">
+                        <form action="{{url('/admin/profile/update',$data->id)}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6 pb-2">
+                                        <label class="fw-bold">Name : </label>
+                                        <input type="text" name="name" value="{{$data->name}}" class="form-control my-2">
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <label> <span class="fw-bold">Image</span>  : <img src="{{asset('/images/profile/'.$data->image)}}" alt="Image Here" class="img-fluid" style="width:50px;"></label>
+                                        <input type="file" name="image" class="form-control my-2">
+                                    </div>
+                                    <div class="col-md-6 pb-2">
+                                        <label class="fw-bold">Gender : </label>
+                                        <div class="form-check pt-2">
+                                            <input class="form-check-input" type="radio" name="gender" value="Male" id="Male{{$data->id}}" <?php if($data->gender=="Male"){ echo "checked"; } ?> >
+                                            <label class="form-check-label" for="Male{{$data->id}}">Male</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="Female" id="Female{{$data->id}}" <?php if($data->gender=="Female"){ echo "checked"; } ?> >
+                                            <label class="form-check-label" for="Female{{$data->id}}">Female</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" value="Others" id="Others{{$data->id}}" <?php if($data->gender=="Others"){ echo "checked"; } ?> >
+                                            <label class="form-check-label" for="Others{{$data->id}}">Others</label>
+                                        </div>
+                                    </div>
+                                    @if(!is_null($hobby))
+                                    <div class="col-md-6 pb-2">
+                                        <label class="fw-bold">Hobbies : </label>                                            
+                                        <div class="form-check pt-2">  
+                                            <input class="form-check-input" type="checkbox" name="hobbies[]" value="Playing" id="Playing{{$data->id}}" {{ in_array('Playing',$hobby)? 'checked':'' }} > 
+                                            <label class="form-check-label" for="Playing{{$data->id}}">Playing</label>
+                                        </div>
+                                        <div class="form-check"> 
+                                            <input class="form-check-input" type="checkbox" name="hobbies[]" value="Drwing" id="Drwing{{$data->id}}" {{ in_array('Drwing',$hobby)? 'checked':'' }} >
+                                            <label class="form-check-label" for="Drwing{{$data->id}}">Drwing</label>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <div class="col-md-6 pb-2">
+                                        <label class="fw-bold">Hobbies : </label>                                            
+                                        <div class="form-check pt-2">  
+                                            <input class="form-check-input" type="checkbox" name="hobbies[]" value="Playing" id="Playing{{$data->id}}"> 
+                                            <label class="form-check-label" for="Playing{{$data->id}}">Playing</label>
+                                        </div>
+                                        <div class="form-check"> 
+                                            <input class="form-check-input" type="checkbox" name="hobbies[]" value="Drwing" id="Drwing{{$data->id}}">
+                                            <label class="form-check-label" for="Drwing{{$data->id}}">Drwing</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 pb-2">
+                                        <label class="fw-bold">Profession : </label>
+                                        <select name="profession" class="form-select" aria-label="Default select example">
+                                            <option hidden selected value="{{$data->profession}}">{{$data->profession}}</option>
+                                            <option value="Student">Student</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Job">Job</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 pb-2">
+                                        <label class="fw-bold">Detail : </label>
+                                        <textareas name="detail" id="editor" cols="30" rows="3" class="form-control my-2">{!!$data->detail!!}</textareas>
+                                    </div>
+                                    <div class="col-12 py-4 text-center">
+                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+@endsection                                                  
+
+@section('js')
+
+    <!-- editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector('#editor'))
+            .catch( error => { console.error( error ); } );
+    </script>
+
+@endsection 
+ 
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- web -->
+<div class="modal fade" id="webModal" tabindex="-1" aria-labelledby="webModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="webModalLabel">web</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <textarea cols="200" rows="20" class="form-control">
+
+use App\Http\Controllers\ProfileController;
+
+// ProfileController
+Route::get('/', [ProfileController::class, 'index']);
+Route::post('/admin/profile/store', [ProfileController::class, 'store']);
+Route::get('/admin/profile/edit/{id}', [ProfileController::class, 'edit']);
+Route::put('/admin/profile/update/{id}', [ProfileController::class, 'update']);
+Route::get('/admin/profile/delete/{id}', [ProfileController::class, 'delete']);
+
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
