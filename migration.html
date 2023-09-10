@@ -35,6 +35,8 @@ $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('casc
 
 $table->foreign('user_id')->references('id')->on('users');
 
+/app/Providers/AppServiceProvider.php
+          
 use Illuminate\Support\Facades\Schema;
 public function boot()
 {
