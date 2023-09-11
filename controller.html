@@ -11,7 +11,9 @@
   <body>
     <div class="container pt-4">
       <div class="row">
-        <textarea cols="200" rows="20" class="form-control">                                                      
+        <textarea cols="200" rows="20" class="form-control"> 
+$categories = Category::select('*')->where('name','LIKE','%'.$request->search.'%')->orWhere('id','LIKE','%'.$request->search.'%')->latest()->get();
+          
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
