@@ -11,49 +11,38 @@
   <body>
     <div class="container pt-4">
       <div class="row">
-        <textarea cols="200" rows="20" class="form-control">                                                      
-BLADE
-  <form action="" method="GET">
+        <textarea cols="200" rows="20" class="form-control"> 
+Route::get('/dashboard', [StudentController::class, 'index']);
+          
+public function index(Request $request){
+    $all_data = Student::get(); 
+    $all_data = Student::when($request->id !=null, function($q) use($request){ return $q->where('id',$request->id); })  
+                        ->when($request->phone !=null, function($q) use($request){ return $q->where('phone',$request->phone); })
+                        ->latest()->get();                                                  
+    return view('dashboard',compact('all_data'));
+}
+          
+<form action="" method="GET">
     <div class="row">
         <div class="col-5">
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Filter By Date</span>
-            <input type="date" name="created_at" value="{{ Request::get('created_at') ?? date('Y-m-d') }}" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-          </div>  
+            <div class="input-group mb-3">
+                <span class="input-group-text">Filter By ID</span>
+                <input type="text" name="id" class="form-control">
+            </div>  
         </div>
         <div class="col-5">
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Filter By Status</span>
-              <select name="status" class="form-select" aria-label="Default select example">
-                <option value="">Choose All</option>
-                <option value="complete" {{ Request::get('status') == 'complete' ? 'selected':'' }}>Complete</option>
-                <option value="incomplete" {{ Request::get('status') == 'incomplete' ? 'selected':'' }}>Incomplete</option>
-              </select>
-          </div>  
+            <div class="input-group mb-3">
+                <span class="input-group-text">Filter By Phone</span>
+                <input type="text" name="phone" class="form-control">
+            </div>  
         </div>
-        <div class="col-2 text-end">
-              <button type="submit" class="btn btn-success">Filter</button>
+        <div class="col-2">
+            <div class="row">
+                <button type="submit" class="btn btn-success bg-success text-white p-2">Filter</button>
+            </div>
         </div>
     </div>
-  </form>
-
-CONTROLLER
-use App\Models\Unit;
-use Illuminate\Support\Carbon;
-
-    public function index(Request $request){        
-        $todayDate = Carbon::now()->format('Y-m-d');
-        $all_data = Unit::when($request->created_at !=null, function($q) use($request){
-                                    return $q->whereDate('created_at',$request->created_at);
-                                }, function($q) use($todayDate){
-                                    return $q->whereDate('created_at',$todayDate);     
-                                })
-                        ->when($request->status !=null, function($q) use($request){
-                                    return $q->where('status',$request->status);
-                                })  
-                        ->get();                                                   
-        return view('backend.rawMaterialManager.unit.index',compact('all_data'));
-    }
+</form>
         </textarea>
       </div>
     </div>
