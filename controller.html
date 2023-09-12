@@ -227,6 +227,39 @@ public function test($course_id,$chapter_id){
     }
     return redirect()->back()->with('delete', 'No MCQ available NOW.');
 } 
+
+ONE FILED STATIC ONE FILED DYNAMIC
+<form method="POST" action="{{ route('products.store') }}">
+    @csrf
+    <div class="form-group">
+        <label for="product_name">Product Name</label>
+        <input type="text" name="product_name" id="product_name" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="prices">Prices</label>
+        @for ($i = 0; $i < 5; $i++)
+            <input type="text" name="prices[]" class="form-control" required>
+        @endfor
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+public function store(Request $request)
+{
+    // Create a new product
+    $product = new Product();
+    $product->name = $request->input('product_name');
+    $product->save();
+
+    // Attach prices to the product
+    foreach ($request->input('prices') as $price) {
+        $product->prices()->create(['value' => $price]);
+    }
+    return redirect()->route('products.index')->with('success', 'Product created successfully.');
+}
+          
         </textarea>
       </div>
     </div>
