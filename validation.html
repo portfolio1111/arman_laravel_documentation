@@ -18,12 +18,14 @@ return back()->with('status', 'Task was successful!')
 public function store(Request $request)
 {
     $validated = $request->validate([
-        'title' => 'required|unique:posts|max:255',
+        'title' => 'required|string|unique:posts|max:255',
         'title' => ['required', 'unique:posts', 'max:255'],
         'body' => 'required',
         'publish_at' => 'nullable|date',
         'photo' => 'mimes:jpg,bmp,png',
         'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime',
+        'prices' => 'required|array',
+        'prices.*' => 'numeric',
     ]);
 
     // The blog post is valid...
