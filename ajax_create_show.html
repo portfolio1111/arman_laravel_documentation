@@ -23,7 +23,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $student = new Student();
-        $student->name = $request->input('name');
+        $student->student_name = $request->input('student_name');
         $student->mobile = $request->input('mobile');
         $student->save();
         return response()->json(['message' => 'Student added successfully']);
@@ -32,13 +32,13 @@ class StudentController extends Controller
 
     <form id="studentForm">
         @csrf
-        <input type="text" name="name" placeholder="Enter student name">
+        <input type="text" name="student_name" placeholder="Enter student name">
         <input type="text" name="mobile" placeholder="Enter student mobile">
         <button type="submit">Add Student</button>
     </form>
     <ul id="studentList">
         @foreach($students as $student)
-            <li>{{ $student->name }} - {{ $student->mobile }}</li>
+            <li>{{ $student->student_name }} - {{ $student->student_name }}</li>
         @endforeach
     </ul>
     
@@ -53,7 +53,7 @@ class StudentController extends Controller
                     url: '/students',
                     data: $('#studentForm').serialize(),
                     success: function (response) {
-                        $('#studentList').append('<li>' + $('input[name="name"]').val() +' - '+ $('input[name="mobile"]').val() + '</li>');
+                        $('#studentList').append('<li>' + $('input[name="student_name"]').val() +' - '+ $('input[name="mobile"]').val() + '</li>');
                         $('#studentForm')[0].reset();
                     }
                 });
