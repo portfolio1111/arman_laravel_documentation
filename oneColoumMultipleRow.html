@@ -27,6 +27,17 @@
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="20" class="form-control">
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
+
+Route::get('/', [StudentController::class, 'index']);
+Route::get('/create', [StudentController::class, 'create']);
+Route::post('/store', [StudentController::class, 'store']);
+Route::get('/edit/{id}', [StudentController::class, 'edit']);
+Route::post('/update/{id}', [StudentController::class, 'update']);
+Route::get('/delete/{id}', [StudentController::class, 'delete']);
 
         </textarea>
       </div>
@@ -45,7 +56,23 @@
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="20" class="form-control">
-          
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Student extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+      'batch_name',
+      'name',
+      'mobile',
+    ];
+}
+
         </textarea>
       </div>
       <div class="modal-footer">
@@ -63,7 +90,54 @@
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="20" class="form-control">
- 
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Student;
+use Illuminate\Http\Request;
+
+class StudentController extends Controller
+{
+    public function create(){
+        return view('students.create');
+    }
+    public function index(){
+        $students = Student::all();
+        return view('students.index', compact('students'));
+    }
+    public function edit($id){
+        $student = Student::find($id);
+        return view('students.edit',compact('student'));
+    }
+    public function update($id, Request $request){
+        $name = json_encode($request->name);
+        $mobile = json_encode($request->mobile);
+        $in = [];
+        $in['batch_name'] = $request->batch_name;
+        $in['name'] = $name;
+        $in['mobile'] = $mobile;
+        $student = Student::find($id);
+        $student -> update($in);
+        return redirect()->to('/');
+    }
+    public function store(Request $request){
+        $name = json_encode($request->name);
+        $mobile = json_encode($request->mobile);
+        $in = [];
+        $in['batch_name'] = $request->batch_name;
+        $in['name'] = $name;
+        $in['mobile'] = $mobile;
+        $store = Student::create($in);
+        return redirect()->to('/');
+    }
+    public function delete($id){
+        $student = Student::find($id);
+        $student -> delete();
+        return redirect()->back();
+    }
+}
+
         </textarea>
       </div>
       <div class="modal-footer">
@@ -81,6 +155,71 @@
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="20" class="form-control">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel Student App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ url('/') }}" class="btn btn-primary">Index</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form action="{{ url('/store') }}" method="post" class="form-control p-4"> @csrf
+                <table class="bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">
+                                Batch Name
+                                <input type="text" name="batch_name" placeholder="Batch Name" class="form-control mt-2 mb-3">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Student Mobile</th>
+                            <th>
+                                <a href="javascript:void(0)" class="btn btn-success addRow">+</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="name[]" placeholder="Name" class="form-control mt-2 mb-3"></td>
+                            <td><input type="number" name="mobile[]" placeholder="Mobile" class="form-control mt-2 mb-3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $('thead').on('click','.addRow', function(){
+            var tr = `
+            <tr>
+                <td><input type="text" name="name[]" placeholder="Name" class="form-control mt-2 mb-3"></td>
+                <td><input type="number" name="mobile[]" placeholder="Mobile" class="form-control mt-2 mb-3"></td>
+                <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></td>
+            </tr>
+            `;
+            $('tbody').append(tr);
+        });
+        $('tbody').on('click','.deleteRow',function(){
+            $(this).parent().parent().remove();
+        });
+    </script>
+
+</body>
+</html>
 
         </textarea>
       </div>
@@ -99,6 +238,71 @@
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="20" class="form-control">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel Student App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 pb-4">
+                <a href="{{ url('/create') }}" class="btn btn-primary">Create</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-responsive table-striped">
+                        <thead class="table-dark">
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Batch Name</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Student Mobile</th>
+                            <th scope="col" class="text-center">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($students as $student)
+                          <tr>
+                            <th scope="row">{{ $student->id }}</th>
+                            <th>{{ $student->batch_name }}</th>
+                            <td>
+                                @php
+                                    $names = json_decode($student->name, true);
+                                @endphp
+                                @foreach($names as $name)
+                                    {{ $name }} <br>
+                                @endforeach
+                            </td>
+                            <td>
+                                @php
+                                    $mobiles = json_decode($student->mobile, true);
+                                @endphp
+                                @foreach($mobiles as $mobile)
+                                    {{ $mobile }} <br>
+                                @endforeach
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ url('/edit',$student->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ url('/delete',$student->id) }}" class="btn btn-danger">Delete</a>
+                            </td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
 
         </textarea>
       </div>
@@ -117,6 +321,78 @@
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="20" class="form-control">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel Student App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ url('/') }}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form action="{{ url('/update',$student->id) }}" method="post" class="form-control p-4"> @csrf
+                <table class="bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">
+                                Batch Name
+                                <input type="text" name="batch_name" value="{{ $student->batch_name }}" class="form-control mt-2 mb-3">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>
+                                <a href="javascript:void(0)" class="btn btn-success addRow">+</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $names = json_decode($student->name, true);
+                            $mobiles = json_decode($student->mobile, true);
+                        @endphp
+                        @foreach($names as $key => $data)
+                        <tr>
+                            <td><input type="text" name="name[]" value="{{ $data }}" placeholder="Name" class="form-control mt-2 mb-3"></td>
+                            <td><input type="number" name="mobile[]" value="{{ $mobiles[$key] }}" placeholder="Mobile" class="form-control mt-2 mb-3"></td>
+                            <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $('thead').on('click','.addRow', function(){
+            var tr = `
+            <tr>
+                <td><input type="text" name="name[]" placeholder="Name" class="form-control mt-2 mb-3"></td>
+                <td><input type="number" name="mobile[]" placeholder="Mobile" class="form-control mt-2 mb-3"></td>
+                <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></td>
+            </tr>
+            `;
+            $('tbody').append(tr);
+        });
+        $('tbody').on('click','.deleteRow',function(){
+            $(this).parent().parent().remove();
+        });
+    </script>
+
+</body>
+</html>
 
         </textarea>
       </div>
