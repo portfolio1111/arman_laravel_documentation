@@ -19,9 +19,11 @@ npm install -g create-react-app
 create-react-app myapp
 cd myapp
 npm start  
+--------------------------------------------------------------------------------------------
 components -> 1)class based components 2) functional components
-JS + XML => JSX [HTML এর মত দেখতে তবে HTML নয়]   
-
+JS + XML => JSX [ HTML এর মত দেখতে তবে HTML নয় ]  
+jQuery ব্যবহার করা যাবে না 
+--------------------------------------------------------------------------------------------
 src/App.js
 import logo from './logo.svg';
 import './App.css';
@@ -34,8 +36,8 @@ function App() {
   );
 }
 export default App;
-          
-src/Components/User.js [class component]
+--------------------------------------------------------------------------------------------       
+src/Components/User.js [ class component ]
 import React,{Component} from 'react';
 class User extends Component {
     render(){
@@ -47,14 +49,14 @@ class User extends Component {
     }
 }
 export default User;
-       
-src/Components/User.js [funtional component]
+--------------------------------------------------------------------------------------------  
+src/Components/User.js [ funtional component ]
 import React from 'react';
 function User(){
     return <h1>Hello</h1>;
 }
 export default User;
-----------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 src/Components/User.js [ without JSX format ]    
 import React from 'react';
 function User(){
@@ -65,7 +67,8 @@ function User(){
     );
 }
 export default User; 
-          
+--------------------------------------------------------------------------------------------
+
         </textarea>
       </div>
     </div>
