@@ -68,7 +68,32 @@ function User(){
 }
 export default User; 
 --------------------------------------------------------------------------------------------
+props
+          
+App.js
+<User name="Arman"></User>
+<User name="Sharif"></User>
+          
+User.js
+function User(props){
+    return <h1>Hello {props.name}</h1>;
+}
+class User extends Component {
+    constructor(props){
+        super(props);
+        this.props = props;
+    }
+    render(){
+        return(
+            <div>
+                <h1>Hello {this.props.name}</h1>
+            </div>
+        );
+    }
+}
+--------------------------------------------------------------------------------------------
 
+          
         </textarea>
       </div>
     </div>
