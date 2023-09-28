@@ -54,7 +54,17 @@ function User(){
     return <h1>Hello</h1>;
 }
 export default User;
-
+----------------------------------------------------------------
+src/Components/User.js [ without JSX format ]    
+import React from 'react';
+function User(){
+    return React.createElement(
+        "h1",
+        null,
+        "Hello"
+    );
+}
+export default User; 
           
         </textarea>
       </div>
