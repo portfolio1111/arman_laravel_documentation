@@ -15,13 +15,65 @@
 $categories = Category::select('*')->where('name','LIKE','%'.$request->search.'%')->orWhere('id','LIKE','%'.$request->search.'%')->latest()->get();
           
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Profile;
   
 public function create(){                                                 
     return view('profile.create');
-}   
-
+}    
+public function index(){
+    $all_data = Profile::select('*')->orderBy('id', 'DESC')->get();                                                   
+    return view('profile.index',compact('all_data'));
+} 
+public function store3(Request $request){
+    $all_data = new Profile;                                              
+    $all_data ->title= $request->title;                                                 
+    if(count($request->image)>0) {
+      foreach($request->image as $file){
+        $name=$file->getClientOriginalName();
+        //$name=date('YmdHis') . "." . $file->getClientOriginalExtension();
+        $request->file('image')->storeAs('images/blog/',$name);
+        $file->move(public_path('images/blog/'),$name);
+        $all_data>image = $name;
+      }
+    }                                                   
+    $all_data>save();                                                 
+    return redirect()->back()->with('message', 'Added Successfully!!');
+}
+public function update(Request $request, $id){
+    $data = Profile::find($id);                           
+    $data->name= $request->name;                                    
+    if($request->hasfile('image')){
+        $destination = 'images/blog/'.$data->image;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
+        $file=$request->file('image');
+        //$name=$file->getClientOriginalName();
+        $name=date('YmdHis') . "." . $file->getClientOriginalExtension();
+        $request->file('image')->storeAs('images/blog/',$name);
+        $file->move(public_path('images/blog/'),$name);
+        $data->image = $name;
+    }                                                      
+    $data->update();                                            
+    return redirect()->back()->with('success', 'Updated Successfully Done');  
+}
+public function show($id){
+    $data = Profile::find($id);                                                                                       
+    return view('profile.show', compact('data'));
+} 
+public function edit($id){
+    $data = Profile::find($id);                                          
+    return view('profile.edit', compact('data'));
+} 
+public function delete($id){
+    $data = Profile::find($id);
+    $destination = 'images/blog/'.$data->image;
+    if(File::exists($destination)){
+        File::delete($destination);
+    }                    
+    $data->delete();                                     
+    return redirect()->back()->with('error', 'Deleted Successfully Done');
+} 
 public function store(Request $request){
     $all_data = new Profile;
 
@@ -66,74 +118,7 @@ public function store2(Request $request){
     $profiles->save();
                                                         
     return redirect()->back()->with('message', 'Added Successfully!!');
-}
-  
-public function store3(Request $request){
-
-    $request->validate([
-      'title' => 'required|max:255',
-    ]);
-  
-    $profiles = new Profile;
-                                                  
-    $profiles ->title= $request->title;
-                                                        
-    if(count($request->image)>0) {
-      foreach($request->image as $file){
-        $name=$file->getClientOriginalName();
-        $request->file('image')->storeAs('images/blog/',$name);
-        $file->move(public_path('images/blog/'),$name);
-        $profiles->image = $name;
-      }
-    }
-                                                        
-    $profiles->save();
-                                                        
-    return redirect()->back()->with('message', 'Added Successfully!!');
-}
-public function index(){
-    $all_data = Profile::select('*')->orderBy('id', 'DESC')->get();                                                   
-    return view('profile.index',compact('all_data'));
 } 
-
-public function show($id){
-    $data = Profile::find($id);                                                                                       
-    return view('profile.show', compact('data'));
-} 
-
-public function edit($id){
-    $data = Profile::find($id);                                          
-    return view('profile.edit', compact('data'));
-} 
-
-public function update(Request $request, $id){
-    $data = Profile::find($id);                           
-    $data->name= $request->name;                                    
-    if($request->hasfile('image')){
-        $destination = 'images/blog/'.$data->image;
-        if(File::exists($destination)){
-            File::delete($destination);
-        }
-        $file=$request->file('image');
-        //$name=$file->getClientOriginalName();
-        $name=date('YmdHis') . "." . $file->getClientOriginalExtension();
-        $request->file('image')->storeAs('images/blog/',$name);
-        $file->move(public_path('images/blog/'),$name);
-        $data->image = $name;
-    }                                                      
-    $data->update();                                            
-    return redirect()->back()->with('success', 'Updated Successfully Done');  
-} 
-
-public function delete($id){
-    $data = Profile::find($id);
-    $destination = 'images/blog/'.$data->image;
-    if(File::exists($destination)){
-        File::delete($destination);
-    }                    
-    $data->delete();                                     
-    return redirect()->back()->with('error', 'Deleted Successfully Done');
-}  
 
 public function show($id){
   $data = User::find($id);
