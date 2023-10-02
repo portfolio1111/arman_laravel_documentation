@@ -12,6 +12,19 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+use Illuminate\Support\Facades\Validator;
+
+$request->validate([
+  'title' => 'required|max:255',
+]);
+
+$this->validate($request, [
+    'course_id'=>'required'
+],
+[
+    'course_id.required'=>'Please give a Course'    
+]);
+          
 return back()->flash('status', 'Task was successful!')          
 return back()->with('status', 'Task was successful!')          
 
@@ -45,13 +58,6 @@ public function store(Request $request)
 @error('title')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
-
-$this->validate($request, [
-    'course_id'=>'required'
-],
-[
-    'course_id.required'=>'Please give a Course'    
-]);
           
         </textarea>
       </div>
