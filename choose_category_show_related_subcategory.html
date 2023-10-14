@@ -131,7 +131,66 @@ BLADE FILE
         });
     </script>
 
------------------------------------------------------------------------------------------------------------------------------
+(2)-----------------------------------------------------------------------------------------------------------------------------
+ROUTE
+Route::get('/', [WelcomeController::class, 'index']);
+Route::post('/fetch_sub_categories', [WelcomeController::class, 'fetch_sub_categories']);
+
+CONTROLLER
+<?php
+namespace App\Http\Controllers;
+use App\Models\Category;
+use App\Models\SubCategory;
+use Illuminate\Http\Request;
+class WelcomeController extends Controller
+{
+    public function index(){                                                                  
+        $data['categories'] = Category::get();                                                     
+        return view('welcome',$data);
+    } 
+    public function fetch_sub_categories(Request $request){
+        $data['sub_categories'] = SubCategory::where("category_id", $request->category_id)->get();
+        return response()->json($data);
+    }
+}
+
+BLADE
+<div class="col-4">
+    <select id="dropdown-one" class="form-select mt-2">
+        <option hidden value="">Choose</option>
+        @foreach($categories as $data)
+        <option value="{{$data->id}}">{{$data->name}}</option>
+        @endforeach
+    </select>
+</div>
+<div class="col-4">
+    <select id="dropdown-two" class="form-select mt-2"></select>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dropdown-one').on('change', function () {
+            var idFirst = this.value;
+            $("#dropdown-two").html('');
+            $.ajax({
+                url: "{{url('/fetch_sub_categories')}}",
+                type: "POST",
+                data: { category_id: idFirst, _token: '{{csrf_token()}}' },
+                dataType: 'json',
+                success: function (result) {
+                    $('#dropdown-two').html('<option value="" hidden>Choose</option>');
+                    $.each(result.sub_categories, function (key, value) {
+                        $("#dropdown-two").append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+(3)-----------------------------------------------------------------------------------------------------------------------------
 ROUTE
 Route::get('/', [WelcomeController::class, 'index']);
 Route::post('api/fetch-one', [WelcomeController::class, 'fetchOne']);
