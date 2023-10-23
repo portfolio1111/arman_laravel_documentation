@@ -44,9 +44,7 @@ public function update(Request $request, $id){
     $data->name= $request->name;                                    
     if($request->hasfile('image')){
         $destination = 'images/blog/'.$data->image;
-        if(File::exists($destination)){
-            File::delete($destination);
-        }
+        if(File::exists($destination)){ File::delete($destination); }
         $file=$request->file('image');
         //$name=$file->getClientOriginalName();
         $name=date('YmdHis') . "." . $file->getClientOriginalExtension();
@@ -68,9 +66,7 @@ public function edit($id){
 public function delete($id){
     $data = Profile::find($id);
     $destination = 'images/blog/'.$data->image;
-    if(File::exists($destination)){
-        File::delete($destination);
-    }                    
+    if(File::exists($destination)){ File::delete($destination); }                    
     $data->delete();                                     
     return redirect()->back()->with('error', 'Deleted Successfully Done');
 } 
