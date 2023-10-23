@@ -240,6 +240,10 @@ public function store(Request $request)
     }
     return redirect()->route('products.index')->with('success', 'Product created successfully.');
 }
+
+return redirect()->route('FreeTest', ['id' => $id])->with('success', 'Thanks'); 
+return redirect()->to("/FreeTest/{$id}")->with('success', 'Thanks'); 
+
           
         </textarea>
       </div>
