@@ -116,6 +116,21 @@ update
         </label>
     </div>
 </div>
+
+    <script>
+        let a = 59;
+        let b = setInterval(timeCo, 1000);
+        function timeCo(){
+            if(a==0){
+                clearInterval(b);
+                document.getElementById('submit1').submit();
+            }
+            document.getElementById('newTimeCount').innerHTML=a;
+            a--;
+        }
+    </script>
+          <form id="submit1"></form>
+          
         </textarea>
       </div>
     </div>
