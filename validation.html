@@ -30,7 +30,13 @@ return back()->with('status', 'Task was successful!')
 
 <input id="title" type="text" value="{{ old('title') }}" name="title" class="@error('title') is-invalid @enderror">
 @error('title') <div class="alert alert-danger">{{ $message }}</div> @enderror
-        
+
+$rules = [ 'mobile' => 'min:11|max:11' ];
+$validator = Validator::make($request->all(), $rules);
+if ($validator->fails()) {
+    return redirect()->back()->with('error','Please give a valid mobile number');
+}
+          
 public function store(Request $request)
 {
     $validated = $request->validate([
