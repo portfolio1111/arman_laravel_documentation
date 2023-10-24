@@ -14,7 +14,6 @@
         <textarea cols="200" rows="20" class="form-control">                                                      
 
 ------------------------------------------------------------------------------------------------------------------- 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -45,36 +44,33 @@
         /* RESPONSIVE END */
         /* LINK ACTIVE HOVER START */
         .dropdown-item.active, .dropdown-item:active {
-            color: blue;
+            color: white;
+            background: black;
             text-decoration: none;
-            font-weight: bold;
-            background-color: transparent;
+        }
+        .nav-link{
+            padding: 10px 20px;
+            border-radius: .5rem;
+            margin: 2px 0px;
+        }
+        .dropdown-item{
+            padding: 10px 20px;
+            border-radius: .5rem;
+            margin-left:10%;
+            width: 90%;
         }
         .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-            color: blue;
-            font-weight: bold;
+            color: white;
+            background: black;
         }
         .dropdown-item:focus, .dropdown-item:hover {
-            color: blue;
-            background-color: transparent;
-            font-weight: bold;
+            color: white;
+            background: black;
             transition: .7s;
         }
         .nav-link:focus, .nav-link:hover {
-            color: blue;
-            font-weight: bold;
-            transition: .7s;
-        }
-        .nav-link i, .dropdown-item i {
-            display: none;
-        }
-        .nav-link.active i, .dropdown-item.active i{
-            display: inline;
-            padding-right: 10px;
-        }
-        .nav-link:hover i, .dropdown-item:hover i{
-            display: inline;
-            padding-right: 10px;
+            color: white;
+            background: black;
             transition: .7s;
         }
         /* LINK ACTIVE HOVER END */
@@ -87,8 +83,9 @@
         }
         .myCard:hover{
             cursor: pointer;
-            background: rgb(229, 229, 255);
-            transition: .5s;
+            color: white;
+            background: black;
+            transition: .7s;
         }
         .myCard i{
             font-size: 33px;
@@ -124,16 +121,13 @@
             padding: 0px 5px !important;
         }
         /* TABLE END */
-        /* FORM START */
-        form input{ margin-top: 10px; margin-bottom: 20px; }
-        .myForm{ padding: 20px 20px; box-shadow: 0px 0px 5px gray; }
-        /* FORM END */
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu { display: block;transition: all .5s; }
     </style>
 
   </head>
   <body>
     <!-- SIDEBAR -->
-    <nav class="navbar bg-body-tertiary fixed-top">
+    <nav class="navbar bg-body-tertiary fixed-top my-0 py-0">
         <div class="container-fluid">
           <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
@@ -149,7 +143,6 @@
 
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="./dashboard.html">
-                    <i class="bi bi-caret-right-fill"></i>
                     Dashboard
                 </a>
                 </li>
@@ -161,13 +154,11 @@
                   <ul class="dropdown-menu border-0 ">
                     <li>
                         <a class="dropdown-item " href="./index2.html">
-                            <i class="bi bi-caret-right-fill"></i>
                             Index
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item " href="./create.html">
-                            <i class="bi bi-caret-right-fill"></i>
                             Create
                         </a>
                     </li>
@@ -175,7 +166,6 @@
                 </li>
                 <li class="nav-item"> 
                     <a class="nav-link " href="./demo.html">
-                        <i class="bi bi-caret-right-fill"></i>
                         Demo
                     </a> 
                 </li>
@@ -218,10 +208,10 @@
                   Arman 
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item " href="./profile.html">Profile</a></li>
-                  <li><a class="dropdown-item " href="./setting.html">Settings</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="./index.html">Logout</a></li>
+                  <li><a class="w-100 mx-0 dropdown-item" href="./profile.html">Profile</a></li>
+                  <li><a class="w-100 mx-0 dropdown-item " href="./setting.html">Settings</a></li>
+                  <li><hr class="w-100 mx-0 dropdown-divider"></li>
+                  <li><a class="w-100 mx-0 dropdown-item" href="./index.html">Logout</a></li>
                 </ul>
               </li>
             </ul>
@@ -328,593 +318,9 @@
 
         </div>
 
-        <!-- CREATE CONTENT -->
-        <div class="row justify-content-center pb-4">
-            <div class="col-md-6">
-                <style>
-                    form input{
-                        margin-top: 10px;
-                        margin-bottom: 20px;
-                    }
-                    .myForm{
-                        padding: 20px 20px;
-                        box-shadow: 0px 0px 5px gray;
-                    }
-                </style>
-                <form action="" method="" class="card myForm">
-                    <div class="row">
-
-                        <div class="col-12 text-center fs-3 pb-3 text-decoration-underline">
-                            My Form
-                        </div>
-                        <div class="col-md-6">
-                            <label>Name :</label>
-                            <input type="text" name="" class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Mobile :</label>
-                            <input type="text" name="" class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Name :</label>
-                            <input type="text" name="" class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Mobile :</label>
-                            <input type="text" name="" class="form-control">
-                        </div>
-                        <div class="col-12 text-center">
-                            <button type="" class="btn btn-success px-5">Submit</button>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- INDEX CONTENT -->
-        <div class="row justify-content-center pb-4">
-            <div class="col-12">
-                <div class="armanTableContainer bg-white rounded">
-                    <div class="table-responsive armanTableFixed">
-                        <table class="armanTable table table-responsive table-striped table-hover">
-                            <thead class="table-info">
-                                <tr>
-                                    <th scope="col" class="text-center" width="50">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col" class="text-center" width="150">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#Delete">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Delete -->
-                                <div class="modal fade" id="Delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body text-center text-danger fs-3">
-                                                Are you sure ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <a href="" class="btn btn-danger">Yes</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                    <td class="text-center">
-                                        <a href="" class="btn btn-outline-success">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-primary">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <a href="" class="btn btn-outline-danger">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- LOGIN CONTENT -->
-        <div class="row justify-content-center">
-          <div class="col-lg-4 col-md-6 d-flex" style="height: 100vh;">
-              <form action="" method="" class="card myForm align-self-center">
-                  <div class="row">
-
-                      <div class="col-12 text-center pb-md-5 py-2">
-                        <a class="navbar-brand fw-bold fs-4" href="./index.html">
-                          <i class="bi bi-house-fill fs-4 pe-2"></i>
-                          <!-- <img width="25" height="25" class="d-inline-block align-text-top me-2 rounded bg-dark"> -->
-                          Company Name
-                        </a>
-                      </div>
-                      <div class="col-12">
-                          <label>Email :</label>
-                          <input type="email" name="" class="form-control">
-                      </div>
-                      <div class="col-12">
-                          <label>Password :</label>
-                          <input type="password" name="" class="form-control">
-                      </div>
-                      <div class="col-12 text-center">
-                          <button type="" class="btn btn-primary px-5">Login</button>
-                      </div>
-                      <div class="col-12 text-center pt-2">
-                        <a href="" class="text-decoration-none">Forgotten password?</a>
-                      </div>
-                      <div class="col-12 text-center">
-                        <hr>
-                      </div>
-                      <div class="col-12 text-center">
-                        Don't have an account?
-                      </div>
-                      <div class="col-12 text-center">
-                        <a href="./register.html" class="btn btn-outline-success fw-bold">Register Now</a>
-                      </div>
-
-                  </div>
-              </form>
-          </div>
-        </div>
-
-        <!-- REGISTER CONTENT -->
-        <div class="row justify-content-center">
-          <div class="col-md-6 d-flex" style="height: 100vh;">
-              <form action="" method="" class="card myForm align-self-center">
-                  <div class="row">
-                      <div class="col-12 text-center pb-md-5 py-2">
-                        <a class="navbar-brand fw-bold fs-4" href="./index.html">
-                          <i class="bi bi-house-fill fs-4 pe-2"></i>
-                          <!-- <img width="25" height="25" class="d-inline-block align-text-top me-2 rounded bg-dark"> -->
-                          Company Name
-                        </a>
-                      </div>
-                      <div class="col-md-6">
-                          <label>Name :</label>
-                          <input type="text" name="" class="form-control">
-                      </div>
-                      <div class="col-md-6">
-                          <label>Email :</label>
-                          <input type="email" name="" class="form-control">
-                      </div>
-                      <div class="col-md-6">
-                          <label>Password :</label>
-                          <input type="password" name="" class="form-control">
-                      </div>
-                      <div class="col-md-6">
-                          <label>Confirm Password :</label>
-                          <input type="password" name="" class="form-control">
-                      </div>
-                      <div class="col-12 text-center">
-                          <button type="" class="btn btn-primary px-5">Register</button>
-                      </div>
-                      <div class="col-12 text-center">
-                        <hr>
-                      </div>
-                      <div class="col-12 text-center">
-                        Already Registered?
-                      </div>
-                      <div class="col-12 text-center">
-                        <a href="./login.html" class="btn btn-outline-success fw-bold">Login Now</a>
-                      </div>
-
-                  </div>
-              </form>
-          </div>
-        </div>
-
     </div>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
     <!-- OFFCANVAS HIDE & SHOW START -->
     <script>
       const hoverSection = document.querySelector('#short_sidebar');
@@ -931,7 +337,6 @@
 
   </body>
 </html>
-
 -------------------------------------------------------------------------------------------------------------------
         </textarea>
       </div>
