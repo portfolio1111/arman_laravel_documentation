@@ -182,7 +182,15 @@ DB::table('subcategories')
           ->Join('categories', 'subcategories.category_id', 'categories.id')
           ->select('categories.name','categories.*')
           ->get();
-         
+
+DISTINCT and get all
+use Illuminate\Support\Facades\DB;
+$all_data = Student::select('*')
+->whereIn('id', function ($query) {
+    $query->select(DB::raw('max(id)'))->from('students')->groupBy('mobile');
+})
+->get();
+          
 NOTIFICATION
 $notification = array(
             'message' => '_____',
