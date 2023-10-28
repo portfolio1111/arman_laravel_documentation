@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo</title>
+    <link rel="shortcut icon" href="data:image/jpeg;base64,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" type="image/x-icon">
+    <!-- bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container pt-4">
+      <div class="row">
+        <textarea cols="200" rows="20" class="form-control">                                                      
+----------------------------------------------------------------------------------------------------------------------- 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo</title>
+    <link
+      rel="shortcut icon"
+      href="https://freepngimg.com/thumb/letter/130287-b-letter-free-download-png-hd.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body class="bg-white">
+    <nav class="navbar navbar-expand-lg bg-info-subtle sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="https://c0.wallpaperflare.com/preview/304/131/640/beverage-blog-blogger-browsing.jpg"
+            class="d-block w-100"
+            alt="..."
+            style="height: 93vh"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://c0.wallpaperflare.com/preview/304/131/640/beverage-blog-blogger-browsing.jpg"
+            class="d-block w-100"
+            alt="..."
+            style="height: 93vh"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://c0.wallpaperflare.com/preview/304/131/640/beverage-blog-blogger-browsing.jpg"
+            class="d-block w-100"
+            alt="..."
+            style="height: 93vh"
+          />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <section>
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center">
+            <h3>My Card</h3>
+            <hr />
+          </div>
+
+          <div class="col-md-3 col-11 p-2">
+            <div class="card">
+              <img
+                src="https://i0.wp.com/icenet.blog/wp-content/uploads/2021/12/blog.jpg?fit=400%2C322&ssl=1"
+                class="card-img-top img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-11 p-2">
+            <div class="card">
+              <img
+                src="https://i0.wp.com/icenet.blog/wp-content/uploads/2021/12/blog.jpg?fit=400%2C322&ssl=1"
+                class="card-img-top img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-11 p-2">
+            <div class="card">
+              <img
+                src="https://i0.wp.com/icenet.blog/wp-content/uploads/2021/12/blog.jpg?fit=400%2C322&ssl=1"
+                class="card-img-top img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-11 p-2">
+            <div class="card">
+              <img
+                src="https://i0.wp.com/icenet.blog/wp-content/uploads/2021/12/blog.jpg?fit=400%2C322&ssl=1"
+                class="card-img-top img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h3>My Table</h3>
+            <hr />
+          </div>
+
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-responsive table-striped table-hover">
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col" class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td class="text-end">
+                      <a
+                        href="#"
+                        class="btn btn-outline-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Edit"
+                        ><i class="bi bi-pencil-fill"></i
+                      ></a>
+                      <a
+                        href="#"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Delete"
+                        ><i class="bi bi-trash-fill"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td class="text-end">
+                      <a
+                        href="#"
+                        class="btn btn-outline-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Edit"
+                        ><i class="bi bi-pencil-fill"></i
+                      ></a>
+                      <a
+                        href="#"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Delete"
+                        ><i class="bi bi-trash-fill"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td class="text-end">
+                      <a
+                        href="#"
+                        class="btn btn-outline-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Edit"
+                        ><i class="bi bi-pencil-fill"></i
+                      ></a>
+                      <a
+                        href="#"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Delete"
+                        ><i class="bi bi-trash-fill"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td class="text-end">
+                      <a
+                        href="#"
+                        class="btn btn-outline-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Edit"
+                        ><i class="bi bi-pencil-fill"></i
+                      ></a>
+                      <a
+                        href="#"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Delete"
+                        ><i class="bi bi-trash-fill"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td class="text-end">
+                      <a
+                        href="#"
+                        class="btn btn-outline-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Edit"
+                        ><i class="bi bi-pencil-fill"></i
+                      ></a>
+                      <a
+                        href="#"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Delete"
+                        ><i class="bi bi-trash-fill"></i
+                      ></a>
+                    </td>
+                  </tr>
+
+                  <!-- Edit -->
+                  <div
+                    class="modal fade"
+                    id="Edit"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <form action="" method="post">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update</h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-12 pb-3">
+                                <label for="">Name :</label>
+                                <input type="text" name="" value="Abc..." class="form-control" />
+                              </div>
+                              <div class="col-12 pb-3">
+                                <label for="">Mobile :</label>
+                                <input type="number" name="" value="012" class="form-control" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-success">Update</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Delete -->
+                  <div
+                    class="modal fade"
+                    id="Delete"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body text-center text-danger fs-3">Are you sure ?</div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                          </button>
+                          <button type="button" class="btn btn-danger">Yes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-primary-subtle">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h3>About Us</h3>
+            <hr />
+          </div>
+          <div class="col-md-6 align-self-center">
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel cumque natus quidem
+              quis, itaque exercitationem adipisci odio ab, enim animi possimus minus. Ab nesciunt
+              iusto vero odio. Culpa neque consequatur accusantium vitae ipsum fugit quibusdam
+              facilis id placeat explicabo repellendus non magnam, iste odio maiores cumque sed,
+              molestiae excepturi dolorem impedit porro quos, similique atque ducimus? Voluptatibus,
+              non dicta inventore tempora ab magnam alias! Deleniti accusamus fugit iusto ipsum vel
+              doloribus alias facere quos reprehenderit. Dolorum voluptatum quibusdam saepe
+              reiciendis nam? Commodi ullam odit aliquam, et animi repudiandae voluptatibus quidem
+              eveniet laudantium deserunt eum, quaerat quae maiores perspiciatis nemo illum.
+            </p>
+          </div>
+          <div class="col-md-6 align-self-center p-2">
+            <img
+              src="https://c0.wallpaperflare.com/preview/304/131/640/beverage-blog-blogger-browsing.jpg"
+              alt=""
+              class="img-fluid rounded"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h3>Contact Us</h3>
+            <hr />
+          </div>
+          <div class="col-md-6 p-2">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117658.79381361954!2d89.44986232968654!3d22.84550795444119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff9071cb47152f%3A0xf04b212290718952!2sKhulna!5e0!3m2!1sen!2sbd!4v1698499086722!5m2!1sen!2sbd"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              class="rounded"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div class="col-md-6 align-self-center p-2">
+            <form action="" method="post" class="card px-md-5 p-3 bg-success-subtle">
+              <div class="row">
+                <div class="col-12 py-2">
+                  <label for="">Name :</label>
+                  <input type="text" name="" class="form-control" />
+                </div>
+                <div class="col-12 py-2">
+                  <label for="">Mobile :</label>
+                  <input type="number" name="" class="form-control" />
+                </div>
+                <div class="col-12 py-2">
+                  <label for="">Message :</label>
+                  <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+                <div class="col-12 py-2 text-center">
+                  <button type="submit" class="btn btn-success px-5">Send Now</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <section class="bg-secondary-subtle">
+        <div class="container py-5 text-center">
+          <div class="row">
+            <div class="col-md-4">Demo</div>
+            <div class="col-md-4">Usefull Links</div>
+            <div class="col-md-4">Others</div>
+          </div>
+        </div>
+      </section>
+      <section class="bg-info-subtle">
+        <div class="container text-center py-3">Copyright © Blog Demo 2023</div>
+      </section>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+-----------------------------------------------------------------------------------------------------------------------
+        </textarea>
+      </div>
+    </div>
+    <!-- bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
