@@ -252,7 +252,11 @@ public function store(Request $request)
 return redirect()->route('FreeTest', ['id' => $id])->with('success', 'Thanks'); 
 return redirect()->to("/FreeTest/{$id}")->with('success', 'Thanks'); 
 
-          
+REPORT---------------------------------------------------------------------------------------
+use Carbon\Carbon;
+Earn::latest()->whereMonth('created_at', Carbon::now()->month)->get();
+Earn::latest()->whereDate('created_at',Carbon::yesterday())->get();
+Earn::latest()->whereDate('created_at',Carbon::today())->get();
         </textarea>
       </div>
     </div>
