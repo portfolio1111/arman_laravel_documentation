@@ -257,6 +257,9 @@ use Carbon\Carbon;
 Earn::latest()->whereMonth('created_at', Carbon::now()->month)->get();
 Earn::latest()->whereDate('created_at',Carbon::yesterday())->get();
 Earn::latest()->whereDate('created_at',Carbon::today())->get();
+
+
+return redirect()->to('/checkout/'.$id);
         </textarea>
       </div>
     </div>
