@@ -55,6 +55,43 @@
   
 </script>
 ---------------------------------------------------------------------------------------------------------------------------                              
+@foreach($last_single_order as $data)
+<tr>
+    <td class="text-center">{{ $loop->index+1 }}</td>
+    <td>{{ $data->test->name }}</td>
+    <td class="text-end" id="test_price_{{ $loop->index }}">{{$data->test->price}}</span></td>
+    <td class="text-end">
+        <div class="input-group">
+          <input type="number" value="0" id="test_discount_{{ $loop->index }}" class="form-control text-end">
+          <button class="btn btn-primary button_for_test_discount" type="button" data-row-id="{{ $loop->index }}">Calculate</button>
+        </div>
+    </td>
+    <td class="text-end" >
+        <input type="number" value="{{$data->test->price}}" id="after_discount_{{ $loop->index }}" class="form-control text-end after_discount">
+    </td>
+    <td>{{ $data->delivery_date }}</td>
+    <td class="text-center">
+        <a href="" class="text-danger fw-bold px-1" data-bs-toggle="modal" data-bs-target="#Delete{{ $data->id }}Modal" class="text-danger w-4 h-4 mr-1">
+        delete
+        </a>
+    </td>
+</tr>
+@endforeach
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var button_for_test_discount = document.querySelectorAll('.button_for_test_discount');
+        
+        button_for_test_discount.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var rowIndex = this.getAttribute('data-row-id');
+                var test_price = parseFloat(document.querySelector('#test_price_' + rowIndex).innerText);
+                var discount = parseFloat(document.querySelector('#test_discount_' + rowIndex).value);
+                var discounted_test_price = test_price - (test_price * discount / 100);
+                document.querySelector('#after_discount_' + rowIndex).value = discounted_test_price.toFixed(2);
+            });
+        });
+    });
+</script>
 ---------------------------------------------------------------------------------------------------------------------------                              
 ---------------------------------------------------------------------------------------------------------------------------                              
 ---------------------------------------------------------------------------------------------------------------------------                              
