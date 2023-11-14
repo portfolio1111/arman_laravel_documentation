@@ -17,6 +17,8 @@ php artisan make:seeder BlogSeeder
 use App\Models\Blog;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
           
 BlogSeeder.php 
 public function run(){
@@ -37,6 +39,20 @@ $blogs = [
 Blog::insert($blogs);
 3-------------------------------------------------------------------------
 Blog::create([ 'name' => 'Super Admin', 'password' => Hash::make('12345678') ]);
+4-------------------------------------------------------------------------
+DB::table('users')->insert([
+    'name' => Str::random(10),
+    'email' => Str::random(10).'@gmail.com',
+    'password' => Hash::make('password'),
+]);
+5-------------------------------------------------------------------------
+$users = [
+    [ 'name'=>'Admin User', 'password'=> bcrypt('123456'), ],
+    [ 'name'=>'User', 'password'=> bcrypt('123456'), ],
+];
+foreach ($users as $key => $user) {
+    User::create($user);
+}
           
 }
           
