@@ -46,7 +46,7 @@ $table->foreign('user_id')->reference('id')->on('users')->onDelete('casecade');
 $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 
 $table->foreign('user_id')->references('id')->on('users');
-
+-------------------------------------------------------------------
 /app/Providers/AppServiceProvider.php
           
 use Illuminate\Support\Facades\Schema;
@@ -55,61 +55,10 @@ public function boot()
     Schema::defaultStringLength(191);
 }
 
-SEEDER
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-    public function run(): void
-    {
-        DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
-    }
 
-use App\Models\User;
-    public function run()
-    {
-        User::create([
-            'name' => 'Hardik',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456'),
-        ]);
-    }
 
-    public function run(): void
-    {
-        $users = [
-            [
-               'name'=>'Admin User',
-               'email'=>'admin@itsolutionstuff.com',
-               'type'=>1,
-               'password'=> bcrypt('123456'),
-            ],
-            [
-               'name'=>'Manager User',
-               'email'=>'manager@itsolutionstuff.com',
-               'type'=> 2,
-               'password'=> bcrypt('123456'),
-            ],
-            [
-               'name'=>'User',
-               'email'=>'user@itsolutionstuff.com',
-               'type'=>0,
-               'password'=> bcrypt('123456'),
-            ],
-        ];
-    
-        foreach ($users as $key => $user) {
-            User::create($user);
-        }
-    }
           
-public function run()
-{
-    $this->call(UserSeeder::class);
-}  
+ 
         </textarea>
       </div>
     </div>
