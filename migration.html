@@ -11,7 +11,19 @@
   <body>
     <div class="container pt-4">
       <div class="row">
-        <textarea cols="200" rows="20" class="form-control">     
+        <textarea cols="200" rows="20" class="form-control"> 
+          
+$table->foreignId('devision_id')->constrained('devisions')->nullable();
+$table->integer('quantity');
+$table->integer('damage')->default(0)->nullable();
+$table->boolean('status')->default(0)->nullable();
+$table->decimal('amount',12,2)->nullable();
+$table->enum('status',['active','inactive'])->default('inactive');
+$table->float('discount');
+
+$table->foreign('category_id')->references('id')->on('product_categories');
+$table->foreign('category_id')->reference('id')->on('product_categories');
+          
 $table->id();                                                
 $table->string('name',255)->nullable();
 $table->string('email')->unique();
