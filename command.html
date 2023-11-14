@@ -47,7 +47,14 @@ php artisan breeze:install
 php artisan migrate
 npm install
 npm run dev
-          
+
+
+make .env
+composer update
+php artisan key:generate 
+database create and set in .env
+php artisan migrate:fresh --seed
+
         </textarea>
       </div>
     </div>
