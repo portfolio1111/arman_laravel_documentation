@@ -16,7 +16,42 @@ $categories = Category::select('*')->where('name','LIKE','%'.$request->search.'%
           
 use Illuminate\Support\Facades\File;
 use App\Models\Profile;
-  
+
+public function index(){
+    $data['products'] = Product::all();
+    $data['districts'] = District::get();
+    return view('backend.areas.index',$data);
+}
+public function store(Request $request){
+    $category = Category::create([
+        'name'=>$request->name,
+    ]);
+    if(!empty($category)){
+        return redirect()->route('categories.index')->with('success' ,'Created');
+    }
+    return redirect()->back()->withInput();
+}
+public function update(Request $request, Category $category){
+    $category->update([
+        'name'=>$request->name,
+    ]);
+    if(!empty($category)){
+        return redirect()->route('categories.index')->with('success' ,'Updated');
+    }
+    return redirect()->back()->withInput();
+}
+public function destroy($id){
+    $category = Category::find($id);
+    if (!$category) {
+        return redirect()->back()->with('error', 'Not Found');
+    }
+    $category->subCategories()->delete();
+    $category->delete();
+    return redirect()->route('categories.index')->with('error','Deleted');
+}
+
+$pivotDatas = WarehouseProduct::with('warehouse', 'product')->get();
+          
 public function create(){                                                 
     return view('profile.create');
 }    
