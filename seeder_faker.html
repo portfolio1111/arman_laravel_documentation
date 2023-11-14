@@ -16,38 +16,39 @@ php artisan make:seeder BlogSeeder
           
 use App\Models\Blog;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
           
 BlogSeeder.php 
 public function run(){
-  $faker = Faker::create();
-  for(i=0; i<100; i++){
-    $all_blog = new Blog;          
-    $all_blog->name = $faker->name;       
-    $all_blog->save();
-  }
+
+1-------------------------------------------------------------------------
+$faker = Faker::create();
+for(i=0; i<100; i++){
+  $all_blog = new Blog;          
+  $all_blog->name = $faker->name;       
+  $all_blog->save();
+}
+
+2-------------------------------------------------------------------------
+$blogs = [
+    ['name'=>'Arman','created_at'=>now() ], 
+    ['name'=>'Sharif','created_at'=>now() ],
+];
+Blog::insert($blogs);
+3-------------------------------------------------------------------------
+Blog::create([ 'name' => 'Super Admin', 'password' => Hash::make('12345678') ]);
+          
 }
           
 DatabaseSeeder.php
 public function run(){
   $this->call([
-      BlogSeeder::class
+      BlogSeeder::class,
   ]);
 }
-          
-php artisan db:seed
-
-1-------------------------------------------------------------------------
-$areas = [
-    ['name'=>'Arman','created_at'=>now() ], 
-    ['name'=>'Sharif','created_at'=>now() ],
-];
-Area::insert($areas);
-2-------------------------------------------------------------------------
-User::create([
-    'name' => 'Super Admin',
-    'email' => 'superadmin@gmail.com',
-    'password' => Hash::make('12345678')
-]);
+         
+php artisan migrate:fresh --seed
+php artisan db:seed --class=BlogSeeder
           
         </textarea>
       </div>
