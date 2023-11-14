@@ -12,6 +12,20 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control">
+
+public function districts(){
+    return $this->hasMany(District::class);
+} 
+public function user(){
+    return $this->belongsTo(User::class);
+}  
+public function users(){
+    return $this->belongsToMany(User::class,'roles_devisions','area_id' ,'user_id');
+}  
+public function products(){
+    return $this->belongsToMany(Product::class, 'finished_products','packaging_id','product_id')->withPivot('quantity');
+}
+          
 class Clash extends Model
 {
     use HasFactory;
