@@ -67,8 +67,9 @@ Factory------------------------------------------------------------------
 php artisan make:factory BlogFactory
           
 factories/BlogFactory.php
+use Illuminate\Support\Str;
         return [
-            'title' => fake()->title(),
+            'title' => Str::random(30),
             'detail' => fake()->paragraph(),
         ]; 
           
