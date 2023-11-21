@@ -11,7 +11,11 @@
   <body>
     <div class="container pt-4">
       <div class="row">
-        <textarea cols="200" rows="20" class="form-control">                                                      
+        <textarea cols="200" rows="20" class="form-control">    
+use App\Http\Controllers\PhotoController;
+Route::resource('photos', PhotoController::class);
+photos.index/photos.create/photos.store/photos.show/photos.edit/photos.update/photos.destroy
+          
 Route::get('/', function () { return view('welcome');} );
 Route::view('/','welcomeNew');
   
