@@ -12,7 +12,56 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
-Delete er jonno
+writers
+---------------
+id
+name
+
+blogs
+---------------
+id 
+writer_id
+title
+          
+belongsTo---------------------------------------------
+Blog CONTROLLER
+    public function blogs(){
+        $data['blogs'] = Blog::get();
+        return view('blogs',$data);
+    }
+Blog MODEL          
+    public function writer(){
+        return $this->belongsTo(Writer::class);
+    }
+    @foreach($blogs as $blog)
+      <tr>
+        <th scope="row">{{ $loop->index+1 }}</th>
+        <td>{{ $blog->title }} -by {{ $blog->writer->name }} </td>
+      </tr>
+    @endforeach  
+hasMany-----------------------------------------------    
+Writer CONTROLLER
+    public function writers(){
+        $data['writers'] = Writer::get();
+        return view('writers',$data);
+    }
+Writer MODEL
+    public function blogs(){
+        return $this->hasMany(Blog::class);
+    }
+    @foreach($writers as $writer)
+      <tr>
+        <th scope="row">{{ $loop->index+1 }}</th>
+        <td>{{ $writer->name }}</td>
+        <td>
+          @foreach($writer->blogs as $blog)
+            {{ $blog->id }} - {{ $blog->title }}<br>
+          @endforeach
+        </td>
+      </tr>
+    @endforeach
+          
+Delete er jonno----------------------------------------------
 MODEL
 class Course extends Model
 {
@@ -35,7 +84,7 @@ Show koranor jonno
 MODEL
 class Course extends Model
 {
-    use HasFactory;
+    use HasFactory;        
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -50,26 +99,7 @@ BLADE
           {{$course->user->name}}
 @endforeach
           
-CONTROLLER
-    public function writers(){
-        $data['writers'] = Writer::get();
-        return view('writers',$data);
-    }
-MODEL
-    public function blogs(){
-        return $this->hasMany(Blog::class);
-    }
-    @foreach($writers as $writer)
-      <tr>
-        <th scope="row">{{ $loop->index+1 }}</th>
-        <td>{{ $writer->name }}</td>
-        <td>
-          @foreach($writer->blogs as $blog)
-          {{ $blog->id }} - {{ $blog->title }}<br>
-          @endforeach
-        </td>
-      </tr>
-    @endforeach
+
           
           
         </textarea>
