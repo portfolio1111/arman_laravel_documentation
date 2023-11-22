@@ -50,6 +50,28 @@ BLADE
           {{$course->user->name}}
 @endforeach
           
+CONTROLLER
+    public function writers(){
+        $data['writers'] = Writer::get();
+        return view('writers',$data);
+    }
+MODEL
+    public function blogs(){
+        return $this->hasMany(Blog::class);
+    }
+    @foreach($writers as $writer)
+      <tr>
+        <th scope="row">{{ $loop->index+1 }}</th>
+        <td>{{ $writer->name }}</td>
+        <td>
+          @foreach($writer->blogs as $blog)
+          {{ $blog->id }} - {{ $blog->title }}<br>
+          @endforeach
+        </td>
+      </tr>
+    @endforeach
+          
+          
         </textarea>
       </div>
     </div>
