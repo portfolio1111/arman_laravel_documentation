@@ -13,6 +13,11 @@
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
 migration er time ta important table relation ship er jonno
+
+$table->unsignedBigInteger('writer_id');
+$table->foreign('writer_id')->references('id')->on('writers');
+OR
+$table->foreignId('writer_id')->constrained();
           
 $table->foreignId('devision_id')->constrained('devisions')->nullable();
 $table->integer('quantity');
