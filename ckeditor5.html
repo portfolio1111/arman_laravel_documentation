@@ -38,6 +38,30 @@ public function testimonialStore2(Request $request){
         return response()->json(['fileName'=>$fileName,'uploaded'=>1,'url'=>$url]);
     }
 }
+
+
+    public function testimonialStore2(Request $request){
+        if($request->hasFile('upload')){
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+    
+            $file = $request->file('upload');
+            $path = public_path('media');
+    
+            // Save the original image
+            $file->move($path, $fileName);
+    
+            // Resize the image
+            $img = Image::make($path . '/' . $fileName);
+            $img->resize(400, 300)->save($path . '/' . $fileName);
+    
+            $url = asset('media/'.$fileName);
+    
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+        }
+    }
           
         </textarea>
       </div>
