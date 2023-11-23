@@ -52,6 +52,7 @@
                                 <td>{{$all_data->title}}</td>
                                 <td><img src="{{ asset('images/blog/'.$all_data->image) }}" style="width:100px;height:100px;"></td>
                                 <td><object data="{{ asset('uploads/'.$all_data->file) }}" type="application/pdf" style="width:300px;height:300px;"></object></td>
+                                <td><object data="{{ asset('uploads/'.$all_data->file) }}#toolbar=0" type="application/pdf" style="width:300px;height:300px;"></object></td>
                                 <td>{!!$all_data->description!!}</td>  {{Str::limit($all_data->description,10)}}
                                 <td style="text-align:center;">
                                     <a href="{{ url('/show',$all_data->id) }}" class="btn btn-success fw-bold mb-1">Show</a>
