@@ -105,6 +105,13 @@ public function delete($id){
     $data->delete();                                     
     return redirect()->back()->with('error', 'Deleted Successfully Done');
 } 
+public function delete($id){
+    $data = Blog::find($id);
+    $destination = public_path('images/blog/'.$data->image);
+    if(file_exists($destination)){ unlink($destination); }                    
+    $data->delete();                                     
+    return redirect()->back()->with('error', 'Deleted Successfully Done');
+}
 public function store(Request $request){
     $all_data = new Profile;
 
