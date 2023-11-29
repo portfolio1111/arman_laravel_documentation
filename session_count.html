@@ -17,8 +17,14 @@ $products = Product::get();
 $productCount = count($products);
 session(['productCount' => $productCount]);
 
-SIDEBAR
+BLADE
 Products  {{ session('productCount', 0) }}
+
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
         </textarea>
       </div>
     </div>
