@@ -11,21 +11,41 @@
   <body>
     <div class="container pt-4">
       <div class="row">
-        <textarea cols="200" rows="20" class="form-control">                                                      
+        <textarea cols="200" rows="20" class="form-control">  
+lauouts/frontend.blade.php
+------------------------------------------------------------------------
+<title>@yield('title')</title>
+<meta name="description" content="@yield('meta_description')">
+<meta name="keywords" content="@yield('meta_keyword')">
+<meta name="author" content="Arman Sharif">
+          
+@yield('css')
 @yield('content')
+@yield('js')
+          
+welcome.blade.php
+------------------------------------------------------------------------
+@extends('layouts.frontend')
 
-@include('admin.partials.navbar')
-
-@extends('admin.master')
+@section('title', "$data->title")
+@section('meta_description', "$data->meta_description")
+@section('meta_keyword', "$data->meta_keyword")
+          
+@section('css')
+             
+@endsection 
           
 @section('content')
+
+    @include('partials.contact_form')
+          
 @endsection
 
-@if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+          
+@section('js')
+          
+@endsection
+
         </textarea>
       </div>
     </div>
