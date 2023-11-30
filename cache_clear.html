@@ -24,7 +24,7 @@ Route::get('/clear-cache-all', function() {
     Artisan::call('cache:clear');
     dd("Cache Clear All");
 });
-
+Route::get('/clear-all', function() { Artisan::call('optimize:clear'); return redirect()->to('/'); });
         </textarea>
       </div>
     </div>
