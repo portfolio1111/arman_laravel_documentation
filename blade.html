@@ -18,7 +18,7 @@
 {{ Auth::user()->name }}
 @php $order = \App\Models\Order::where('course_id', $Course->id)->where('user_id',Auth::user()->id)->first(); @endphp
 {{$data->updated_at->format('h:i A D j M Y')}}
-
+{{ (new DateTime($data->appointment_date))->format('d M Y') }}
 
           
 @if (Route::has('login'))
