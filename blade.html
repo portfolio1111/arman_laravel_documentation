@@ -19,8 +19,11 @@
 @php $order = \App\Models\Order::where('course_id', $Course->id)->where('user_id',Auth::user()->id)->first(); @endphp
 {{$data->updated_at->format('h:i A D j M Y')}}
 {{ (new DateTime($data->appointment_date))->format('d M Y') }}
-
-          
+cache not working
+<img src="{{asset('/SurfsideMedia/assets/imgs/logo/logo.png')}}?version={{ time() }}" alt="logo">
+$imagePath = public_path('path/to/image.jpg');
+return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
+        
 @if (Route::has('login'))
 <ul class="navbar-nav ms-auto">
     @auth
