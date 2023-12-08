@@ -27,7 +27,8 @@ $this->validate($request, [
           
 return back()->flash('status', 'Task was successful!')          
 return back()->with('status', 'Task was successful!')          
-
+@if(session('status')) <p> {{ session('status') }} </p>@endif
+          
 <input id="title" type="text" value="{{ old('title') }}" name="title" class="@error('title') is-invalid @enderror">
 @error('title') <div class="alert alert-danger">{{ $message }}</div> @enderror
 
@@ -62,7 +63,39 @@ public function store(Request $request)
         </ul>
     </div>
 @endif
+LOGIN
+    public function login(Request $request): RedirectResponse
+    {   
+        $input = $request->all();
+     
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            
+            if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+            {
+                if (auth()->user()->type == 'admin') {
+                    return redirect()->route('admin.home');
+                }else{
+                    return redirect()->route('home');
+                }
+            }else{
+                return redirect()->route('login')->with('error','Password Are Wrong.');
+            }
+            
+        }
+        else{
+            return back()->with('error','Email does not exist, Register First.');
+        }
+     
 
+          
+    }
+          
         </textarea>
       </div>
     </div>
