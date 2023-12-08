@@ -23,7 +23,9 @@ cache not working
 <img src="{{asset('/SurfsideMedia/assets/imgs/logo/logo.png')}}?version={{ time() }}" alt="logo">
 $imagePath = public_path('path/to/image.jpg');
 return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
-        
+
+{{ str_replace('watch?v=', 'embed/', $data->video) }}
+          
 @if (Route::has('login'))
 <ul class="navbar-nav ms-auto">
     @auth
