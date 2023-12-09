@@ -25,6 +25,8 @@ $imagePath = public_path('path/to/image.jpg');
 return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
 
 {{ str_replace('watch?v=', 'embed/', $data->video) }}
+don't download image
+<img class="animated slider-1-1" src="" alt="" oncontextmenu="return false;">
           
 @if (Route::has('login'))
 <ul class="navbar-nav ms-auto">
