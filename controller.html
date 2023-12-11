@@ -192,6 +192,10 @@ else{
 RESIZE    
 composer require intervention/image
 use Image;
+composer.json
+    "require": {
+        "intervention/image": "^2.7",
+    },   
     public function categoryStore(Request $request)
     {
         $all_data = new Category;
