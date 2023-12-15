@@ -24,6 +24,11 @@ cache not working
 $imagePath = public_path('path/to/image.jpg');
 return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
 
+@foreach ($blogs as $data)
+@php $newDate = new DateTime($data->new_date); @endphp
+<p>{{ $newDate->format('m-d-Y') }} - {{ $data->title }} - {{ $data->created_at->format('m-d-Y') }}</p>
+@endforeach
+          
                     <iframe 
                         src="{{ str_replace('youtu.be', 'www.youtube.com/embed', $data->youtube_share_link) }}" 
                         style="width:100%;height:350px;" 
