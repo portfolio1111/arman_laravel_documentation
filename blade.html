@@ -24,6 +24,8 @@ cache not working
 $imagePath = public_path('path/to/image.jpg');
 return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
 
+{{ optional($data->category)->id }}
+          
 @foreach ($blogs as $data)
 @php $newDate = new DateTime($data->new_date); @endphp
 <p>{{ $newDate->format('m-d-Y') }} - {{ $data->title }} - {{ $data->created_at->format('m-d-Y') }}</p>
