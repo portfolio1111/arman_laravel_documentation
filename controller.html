@@ -12,6 +12,14 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+php artisan storage:link
+$image = $request->file('image');
+$imageName = time().'.'.$image->getClientOriginalExtension();
+$image->storeAs('public/blogs', $imageName);
+$data->image=$imageName;
+$data->save();
+<img src="{{ asset('storage/blogs/'.$blog->image) }}">
+          
 $categories = Category::select('*')->where('name','LIKE','%'.$request->search.'%')->orWhere('id','LIKE','%'.$request->search.'%')->latest()->get();
           
 use Illuminate\Support\Facades\File;
