@@ -43,6 +43,7 @@ public function store(Request $request)
     $validated = $request->validate([
         'title' => 'required|string|unique:posts|max:255',
         'title' => ['required', 'unique:posts', 'max:255'],
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
         'body' => 'required',
         'publish_at' => 'nullable|date',
         'photo' => 'mimes:jpg,bmp,png',
