@@ -22,13 +22,11 @@ git push -u origin main
 
 git clone https://github.com/___/___.git (তৈরি করা অনলাইনের প্রোজেক্ট লোকালে নিয়ে আসতে)
 
-touch fileName.txt (কোন ফাইল তৈরি করতে)
-
-mkdir NewFolder1 (কোন ফোল্ডার তৈরি করতে)
-
+git pull origin branch_name (লোকালে ২য় বার কাজ শুরু করার আগে অনলাইন থেকে আগে উঠিয়ে আনতে হবে)
 git add -A
-git commit -m "first commit"
-git push origin main
+git commit -m "about work"
+git push -u origin branch_name (লোকালে কাজ করার পর সেটা অনলাইনে পাঠানোর জন্য)
+
 
 git status (অবস্থা জানতে) tracked/staged
 
@@ -36,33 +34,25 @@ git branch (বর্তমান এ কোন ব্রাঞ্চ এ আছ
 git branch -a (সকল ব্রাঞ্চের নাম দেখতে)
 git branch new_branch (নতুন ব্রাঞ্চ তৈরি করতে)
 git checkout new_branch (এক ব্রাঞ্চ থেকে আরেক ব্রাঞ্চ এ যেতে হলে)
+git checkout -b branch_name (নতুন ব্রাঞ্চ তৈরি করতে এবং সেই ব্রাঞ্চে সুইস করতে)
 git branch -D branch_name (কোন ব্রাঞ্চ ডিলিট করতে)
 
 git merge new_branch (ভিন্ন ব্রাঞ্চ মেইন ব্রাঞ্চের সাথে এক করতে)
-
-git pull origin main (লোকালে ২য় বার কাজ শুরু করার আগে অনলাইন থেকে আগে উঠিয়ে আনতে হবে)
---------------------------------------------------------------------------------------------------------------------------------
-git init
-git add -A
-git commit -m "Any Coment"
-git [copy-paste]
-git push origin master
-          
+     
 clear / ( ctrl+l )
 git --version (git er version dekhte hole)
-git config --global user.name "user_name" (local e user er name set korte hole)
-git config --global user.email "user_email" (local e user er email set korte hole)
-git config --list (user er shomporke dekhte hole)
-git config --global user.name "update_user_name" (local e user er name update korte hole)
-git config --global user.name (shudu user er name dekhte caile)
+git config --global user.name "user_name" (লোকালে ইউজারের নাম সেট অথবা আপডেট করতে)
+git config --global user.email "user_email" (লোকালে ইউজারের ইমেইল সেট অথবা আপডেট করতে)
+git config --list (লোকালে গিট ইউজার সম্পর্কে জানতে)
+git config --global user.name (লোকালে শুধু ইউজারের নাম দেখতে)
           
-mkdir folder_name (notun folder toiri korte hole - Make Directory)
-ls -a (ei folder e ja ja ache shob dekhete hidden shoho)
-touch new.txt
+mkdir folder_name (নতুন ফোল্ডার তৈরি করতে)   
+touch fileName.txt (নতুন ফাইল তৈরি করতে)
+ls (এই ফোল্ডারে যা আছে সব দেখতে)
+ls -a (এই ফোল্ডারে যা আছে সব দেখতে [হিডেন ফাইল সহ])
 pwd (Present Working Directory)
-cd folder_er_name (ek folder theke arekti folder e jete - Change Directory)
+cd folder_name (ek folder theke arekti folder e jete - Change Directory)
 cd .. (jei folder e ache tar thik ager folder e jete)
-ls (ei folder e ja ja ache shob dekhete)
 git init (ei folder ti git er ayotay neye aste)
 git add file_name (file_name ta staging area te niye jete hole)
 git add -A (ei folder e joto file ache shob gulo staging area te niye jete hole)
@@ -91,18 +81,7 @@ git reset --hard HEAD^ (ager commit er obosthay cole jabe)
 git push origin master (local e kaj kora hole jkn online e seta upload korte hoy)
           
 code . ()
-git branch branch_name (kno branch create korte hole)
-git status (bortoman obostha jante - Tracked / Untracked)
-git checkout -b branch_name (notun ekti branch khulte hole & setai switch korte hole)
-git checkout branch_name (ek branch theke arek branch e jete hole)
-git branch -D branch_name (kno branch delete korte hole)
-          
-git merge jei_branch_merge_korte_cassi
-          
-git pull origin master ()
-git clone git_hub_er_project_er_CODE_er_HTTPS_er_url (online er kno project locally niye aste hole)
-         
-          
+        
 MARKDOWN
 
 2 ta space = br
