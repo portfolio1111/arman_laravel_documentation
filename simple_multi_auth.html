@@ -14,51 +14,68 @@
         <textarea cols="200" rows="20" class="form-control"> 
 composer create-project laravel/laravel example-app
 -> got to work_place ->
+      
 composer require laravel/breeze --dev
 php artisan breeze:install
 
 database/migration/users
-$table->string('user_type')->default(0)->comment('ADM for Admin and USR for Normal User');
+$table->string('type')->default(0)->comment('0->User,1->Admin');
+php artisan serve
+          
+app/Models/User.php
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'type'
+    ];
+    protected function type(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) =>  ["user", "admin", "manager"][$value],
+        );
+    }
 
 php artisan migrate
-
-npm install && npm run build
 
 npm install
 npm run dev
 
-php artisan make:middleware AuthAdmin
+php artisan make:middleware UserAccess
 app/Http/kernel.php
 protected $routeMiddleware/$middlewareAliases = [
-  'authadmin' => \App\Http\Middleware\AuthAdmin::class,
+  'user-access' => \App\Http\Middleware\UserAccess::class,
 ];
 
-php artisan serve
-
-app/Http/Middleware/AuthAdmin.php
+app/Http/Middleware/UserAccess.php
 use Illuminate\Support\Facades\Auth;
+public function handle(Request $request, Closure $next, $userType): Response
 {
-  if(Auth::user()->user_type == '1'){
-    return $next($request);
-  }else{
-    session()->flush();
-    return redirect()->route('login');
-  }
+    if(auth()->user()->type == $userType){
+        return $next($request);
+    }
+    return response()->json(['You do not have permission to access for this page.']);
+    /* return response()->view('errors.check-permission'); */
 }
 
 app/Providers/RouteServiceProvider.php
 public const HOME = '/';
 
 route/web.php
-Route::middleware(['auth'])->group(function(){
+use App\Http\Controllers\UserController;
+Auth::routes();
+Route::middleware(['auth','user-access:user'])->group(function(){
   Route::get('/user', [UserController::class, 'user_dashboard']);
 });
-Route::middleware(['auth','authadmin'])->group(function(){
+Route::middleware(['auth','user-access:admin'])->group(function(){
   Route::get('/admin', [UserController::class, 'admin_dashboard']);
 });
 
 php artisan make:controller UserController
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function user_dashboard(){
         return view('user_dashboard');
     }
@@ -70,6 +87,80 @@ resources/views/user_dashboard.blade.php
 resources/views/admin_dashboard.blade.php
 
 
+app/Http/Controllers/Auth/LoginController.php
+--------------------------------------------------------------------------------------
+composer create-project laravel/laravel example-app
+      
+database config -> .end       
+database/migration/users
+$table->string('type')->default(0)->comment('0->User,1->Admin');
+php artisan migrate
+
+-> got to work_place ->
+composer require laravel/ui 
+php artisan ui bootstrap --auth   
+
+npm install
+npm run dev 
+          
+app/Models/User.php
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'type'
+    ];
+    protected function type(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) =>  ["user", "admin"][$value],
+        );
+    }
+
+php artisan make:middleware UserAccess
+app/Http/kernel.php
+protected $routeMiddleware/$middlewareAliases = [
+  'user-access' => \App\Http\Middleware\UserAccess::class,
+];
+
+app/Http/Middleware/UserAccess.php
+use Illuminate\Support\Facades\Auth;
+public function handle(Request $request, Closure $next, $userType): Response
+{
+    if(auth()->user()->type == $userType){
+        return $next($request);
+    }
+    return response()->json(['You do not have permission to access for this page.']);
+    /* return response()->view('errors.check-permission'); */
+}
+
+route/web.php
+use App\Http\Controllers\UserController;
+Auth::routes();
+Route::middleware(['auth','user-access:user'])->group(function(){
+  Route::get('/user', [UserController::class, 'user_dashboard']);
+});
+Route::middleware(['auth','user-access:admin'])->group(function(){
+  Route::get('/admin', [UserController::class, 'admin_dashboard']);
+});
+
+php artisan make:controller UserController
+{
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    public function user_dashboard(){
+        return view('user_dashboard');
+    }
+    public function admin_dashboard(){
+        return view('admin_dashboard');
+    }
+}
+resources/views/user_dashboard.blade.php
+resources/views/admin_dashboard.blade.php
+
+app/Http/Controllers/Auth/LoginController.php
+{}
         </textarea>
       </div>
     </div>
