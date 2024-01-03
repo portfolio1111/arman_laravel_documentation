@@ -23,6 +23,27 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 class User extends Authenticatable implements MustVerifyEmail
 
           
+.env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.googlemail.com
+MAIL_PORT=465
+MAIL_USERNAME=arman.p2c@gmail.com
+MAIL_PASSWORD=12345678
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS="arman.p2c@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+web.php
+Auth::routes(['verify'=>true]);
+Roue::group(['middleware'=>['auth','verified']],function(){
+          
+});
+
+HomeController.php
+p c(){
+  $this->middleware(['auth','verified']);
+}
+          
 forget password
 https://www.itsolutionstuff.com/post/laravel-10-custom-forgot-password-exampleexample.html#google_vignette
 
