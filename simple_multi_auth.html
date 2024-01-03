@@ -28,6 +28,10 @@ npm install
 npm run dev
 
 php artisan make:middleware AuthAdmin
+app/Http/kernel.php
+protected $routeMiddleware/$middlewareAliases = [
+  'authadmin' => \App\Http\Middleware\AuthAdmin::class,
+];
 
 php artisan serve
 
@@ -42,11 +46,6 @@ use Illuminate\Support\Facades\Auth;
   }
 }
 
-app/Http/kernel.php
-protected $routeMiddleware = [
-  'authadmin' => \App\Http\Middleware\AuthAdmin::class,
-];
-
 app/Providers/RouteServiceProvider.php
 public const HOME = '/';
 
@@ -58,16 +57,17 @@ Route::middleware(['auth','authadmin'])->group(function(){
   Route::get('/admin', [UserController::class, 'admin_dashboard']);
 });
 
-
-blade
-@auth
-  @if(Auth::user()->utype == 'ADM')
-  @else
-  @endif
-@else
-@endauth
-
-
+php artisan make:controller UserController
+{
+    public function user_dashboard(){
+        return view('user_dashboard');
+    }
+    public function admin_dashboard(){
+        return view('admin_dashboard');
+    }
+}
+resources/views/user_dashboard.blade.php
+resources/views/admin_dashboard.blade.php
 
 
         </textarea>
