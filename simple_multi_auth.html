@@ -12,7 +12,9 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
-composer create-project laravel/laravel example-app
+composer create-project laravel/laravel multi_auth
+      
+database config -> .end 
 database/migration/users
 $table->string('type')->default(0)->comment('0->User,1->Admin');
 php artisan migrate
@@ -68,7 +70,7 @@ resources/views/admin_dashboard.blade.php
 
 app/Http/Controllers/Auth/LoginController.php
 --------------------------------------------------------------------------------------
-composer create-project laravel/laravel example-app
+composer create-project laravel/laravel multi_auth
       
 database config -> .end       
 database/migration/users
@@ -78,7 +80,6 @@ php artisan migrate
 -> got to work_place ->
 composer require laravel/ui 
 php artisan ui bootstrap --auth   
-
 npm install
 npm run dev 
           
