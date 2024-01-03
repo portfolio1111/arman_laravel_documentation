@@ -13,31 +13,13 @@
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
 composer create-project laravel/laravel example-app
--> got to work_place ->
-      
-composer require laravel/breeze --dev
-php artisan breeze:install
-
 database/migration/users
 $table->string('type')->default(0)->comment('0->User,1->Admin');
-php artisan serve
-          
-app/Models/User.php
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'type'
-    ];
-    protected function type(): Attribute
-    {
-        return new Attribute(
-            get: fn ($value) =>  ["user", "admin", "manager"][$value],
-        );
-    }
-
 php artisan migrate
 
+-> got to work_place ->      
+composer require laravel/breeze --dev
+php artisan breeze:install
 npm install
 npm run dev
 
@@ -49,13 +31,14 @@ protected $routeMiddleware/$middlewareAliases = [
 
 app/Http/Middleware/UserAccess.php
 use Illuminate\Support\Facades\Auth;
-public function handle(Request $request, Closure $next, $userType): Response
+public
 {
-    if(auth()->user()->type == $userType){
-        return $next($request);
-    }
-    return response()->json(['You do not have permission to access for this page.']);
-    /* return response()->view('errors.check-permission'); */
+  if(Auth::user()->user_type == '1'){
+    return $next($request);
+  }else{
+    session()->flush();
+    return redirect()->route('login');
+  }
 }
 
 app/Providers/RouteServiceProvider.php
@@ -63,19 +46,15 @@ public const HOME = '/';
 
 route/web.php
 use App\Http\Controllers\UserController;
-Auth::routes();
-Route::middleware(['auth','user-access:user'])->group(function(){
+Route::middleware(['auth'])->group(function(){
   Route::get('/user', [UserController::class, 'user_dashboard']);
 });
-Route::middleware(['auth','user-access:admin'])->group(function(){
+Route::middleware(['auth','authadmin'])->group(function(){
   Route::get('/admin', [UserController::class, 'admin_dashboard']);
 });
 
 php artisan make:controller UserController
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
     public function user_dashboard(){
         return view('user_dashboard');
     }
