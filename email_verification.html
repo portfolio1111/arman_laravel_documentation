@@ -13,7 +13,7 @@
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
 -----------------------------------------------------------------------
-Email Verification At 
+Email Verification At - MAILTRAP 
 -----------------------------------------------------------------------
 https://mailtrap.io/
 My Inbox -> cURL -> Laravel Latest Version [copy] [paste->.env]
@@ -21,8 +21,15 @@ My Inbox -> cURL -> Laravel Latest Version [copy] [paste->.env]
 User.php
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 class User extends Authenticatable implements MustVerifyEmail
-
-          
+-----------------------------------------------------------------------
+Email Verification At - GMAIL 
+-----------------------------------------------------------------------           
+Gmail Configuration
+Secuirity
+2 step verification - ON
+App Passwords
+Select App & Select Device
+     
 .env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.googlemail.com / smtp.gmail.com
@@ -47,7 +54,9 @@ p c(){
 forget password
 https://www.itsolutionstuff.com/post/laravel-10-custom-forgot-password-exampleexample.html#google_vignette
 
-          
+-----------------------------------------------------------------------
+Email Verification At - c-Panel 
+-----------------------------------------------------------------------  
 -> Cpanel -> Email Accounts -> create account with password 
           
 web.php
@@ -79,12 +88,7 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS="hello@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
-          
-Gmail Configuration
-Secuirity
-2 step verification - ON
-App Passwords
-Select App & Select Device
+
         </textarea>
       </div>
     </div>
