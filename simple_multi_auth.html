@@ -53,7 +53,7 @@ app/Http/Middleware/UserAccess.php
 use Illuminate\Support\Facades\Auth;
 public
 {
-  if(Auth::user()->user_type == '1'){
+  if(Auth::user()->type == '1'){
     return $next($request);
   }else{
     session()->flush();
@@ -69,7 +69,7 @@ use App\Http\Controllers\UserController;
 Route::middleware(['auth'])->group(function(){
   Route::get('/user', [UserController::class, 'user_dashboard']);
 });
-Route::middleware(['auth','authadmin'])->group(function(){
+Route::middleware(['auth','user-access'])->group(function(){
   Route::get('/admin', [UserController::class, 'admin_dashboard']);
 });
 
@@ -84,9 +84,14 @@ php artisan make:controller UserController
 }
 resources/views/user_dashboard.blade.php
 resources/views/admin_dashboard.blade.php
+          
+resources/views/welcome.blade.php
+@if(Auth::user()->type=='1')
+<a href="{{ url('/admin') }}">Dashboard</a>
+@else
+<a href="{{ url('/user') }}">Dashboard</a>
+@endif
 
-
-app/Http/Controllers/Auth/LoginController.php
 -----------------------------------------------------------------------
 2 or more
 -----------------------------------------------------------------------
