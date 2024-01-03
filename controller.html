@@ -40,6 +40,13 @@ public function store(Request $request){
     $data->save();                                                 
     return redirect()->back();
 }
+public function store(Request $request){
+    //Blog.php //protected $fillable = ['title',];
+    $data = Blog::create([
+        'title'=>$request->title,
+    ]);
+    return redirect()->back();
+}
 public function show($id){
     $data['blog'] = Blog::find($id);                                                                                       
     return view('show', $data);
