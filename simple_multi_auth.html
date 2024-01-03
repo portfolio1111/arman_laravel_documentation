@@ -162,7 +162,43 @@ resources/views/user_dashboard.blade.php
 resources/views/admin_dashboard.blade.php
 
 app/Http/Controllers/Auth/LoginController.php
-{}
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+ 
+public function login(Request $request): RedirectResponse
+{   
+    $input = $request->all();
+ 
+    $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+ 
+    if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+    {
+        if (auth()->user()->type == 'admin') {
+            return redirect()->to('/admin');
+        }
+        else{
+            return redirect()->to('/user');
+        }
+    }else{
+        return redirect()->route('login')
+            ->with('error','Email-Address And Password Are Wrong.');
+    }
+      
+}   
+          
+resources/views/welcome.blade.php
+@if(Auth::user()->type=='1')
+<a href="{{ url('/admin') }}">Dashboard</a>
+@else
+<a href="{{ url('/user') }}">Dashboard</a>
+@endif
+
+app/Providers/RouteServiceProvider.php
+public const HOME = '/user';
+    
         </textarea>
       </div>
     </div>
