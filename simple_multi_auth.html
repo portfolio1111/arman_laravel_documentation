@@ -190,7 +190,7 @@ public function login(Request $request): RedirectResponse
 }   
           
 resources/views/welcome.blade.php
-@if(Auth::user()->type=='1')
+@if(Auth::user()->type=='admin')
 <a href="{{ url('/admin') }}">Dashboard</a>
 @else
 <a href="{{ url('/user') }}">Dashboard</a>
