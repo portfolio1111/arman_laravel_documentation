@@ -46,6 +46,7 @@ php artisan serve
 
 RouteServiceProvider.php
 '/home'
+          
 php artisan make:controller HomeController
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -60,10 +61,12 @@ public function index(){
 
 web.php
 use App\Http\Controllers\HomeController;
-Route::get('/home',[HomeController::class, 'index']);
+Route::get('/home',[HomeController::class, 'index'])->middleware(['auth', 'verified']);
 
 resources/views/user_dashboard.blade.php
 resources/views/admin_dashboard.blade.php
+welcome.blade.php
+'/home'
 -----------------------------------------------------------------------
 2
 -----------------------------------------------------------------------
