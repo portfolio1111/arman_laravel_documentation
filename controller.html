@@ -12,6 +12,92 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+---------------------------------------------------------------------------
+Simple Controller
+--------------------------------------------------------------------------- 
+use Illuminate\Support\Facades\File;
+use App\Models\Blog;
+          
+public function create(){                                                 
+    return view('create');
+}        
+public function index(){
+    $data['blogs'] = Blog::all();
+    return view('index', $data);
+}
+public function store(Request $request){
+    $data = new Blog;                                              
+    $data->title = $request->title; 
+          
+    // enctype="multipart/form-data"
+    if($request->hasFile('image')) {
+        $file=$request->file('image');
+        $imageName=date('YmdHis') . "." . $file->getClientOriginalName();
+        $request->file('image')->storeAs('images/blogs/',$imageName);
+        $file->move(public_path('images/blogs/'),$imageName);
+        $data->image = $imageName;
+    }  
+    $data->save();                                                 
+    return redirect()->back();
+}
+public function show($id){
+    $data['blog'] = Blog::find($id);                                                                                       
+    return view('show', $data);
+} 
+public function edit($id){
+    $data['blog'] = Blog::find($id);                                          
+    return view('edit', $data);
+} 
+public function update(Request $request, $id){
+    $data = Blog::find($id);                           
+    $data->title = $request->title;                                    
+    if($request->hasfile('image')){
+        $destination = 'images/blog/'.$data->image;
+        if(File::exists($destination)){ File::delete($destination); }
+        $file=$request->file('image');
+        $imageName=date('YmdHis') . "." . $file->getClientOriginalName();
+        $request->file('image')->storeAs('images/blogs/',$imageName);
+        $file->move(public_path('images/blogs/'),$imageName);
+        $data->image = $imageName;
+    }                                                      
+    $data->update();                                            
+    return redirect()->back();  
+}
+public function delete($id){
+    $data = Blog::find($id);
+    $destination = 'images/blog/'.$data->image;
+    if(File::exists($destination)){ File::delete($destination); }                    
+    $data->delete();                                     
+    return redirect()->back();
+} 
+          
+return redirect()->back()->with('success', 'Added Successfully Done');            
+return redirect()->back()->with('success', 'Updated Successfully Done');        
+return redirect()->back()->with('error', 'Deleted Successfully Done');
+          
+return redirect()->to('/checkout/'.$id);          
+return redirect()->to('/checkout/{$id}');           
+return redirect()->route('abc.xyz');        
+return redirect()->route('abc.xyz', ['id' => $id]);
+          
+---------------------------------------------------------------------------
+RESIZE IMAGE   
+---------------------------------------------------------------------------          
+composer require intervention/image:^2.7
+use Image; 
+if($request->hasFile('image')) {
+    $file=$request->file('image');
+    $imageName=date('YmdHis') . "." . $file->getClientOriginalName();
+          
+    $path = public_path('/images/blogs');
+    $img = Image::make($file->path());
+    $img->resize(300,300)->save($path.'/'.$imageName);
+    $data->image = $imageName;
+} 
+          
+---------------------------------------------------------------------------
+DIFFERENT IMAGE   
+---------------------------------------------------------------------------        
 php artisan storage:link
 $image = $request->file('image');
 $imageName = time().'.'.$image->getClientOriginalExtension();
@@ -20,16 +106,19 @@ $data->image=$imageName;
 $data->save();
 <img src="{{ asset('storage/blogs/'.$blog->image) }}">
           
+---------------------------------------------------------------------------
+SEARCHING SYSTEM   
+---------------------------------------------------------------------------      
 $categories = Category::select('*')->where('name','LIKE','%'.$request->search.'%')->orWhere('id','LIKE','%'.$request->search.'%')->latest()->get();
-          
-use Illuminate\Support\Facades\File;
-use App\Models\Profile;
+      
+---------------------------------------------------------------------------
+REPORT         
+---------------------------------------------------------------------------
+use Carbon\Carbon;
+Earn::latest()->whereMonth('created_at', Carbon::now()->month)->get();
+Earn::latest()->whereDate('created_at',Carbon::yesterday())->get();
+Earn::latest()->whereDate('created_at',Carbon::today())->get();
 
-public function index(){
-    $data['products'] = Product::all();
-    $data['districts'] = District::get();
-    return view('backend.areas.index',$data);
-}
 public function store(Request $request){
     $category = Category::create([
         'name'=>$request->name,
@@ -60,111 +149,12 @@ public function destroy($id){
 
 $pivotDatas = WarehouseProduct::with('warehouse', 'product')->get();
           
-public function create(){                                                 
-    return view('profile.create');
-}    
-public function index(){
-    $all_data = Profile::select('*')->orderBy('id', 'DESC')->get();                                                   
-    return view('profile.index',compact('all_data'));
-} 
-public function store3(Request $request){
-    $all_data = new Profile;                                              
-    $all_data ->title= $request->title;                                                 
-    if(count($request->image)>0) {
-      foreach($request->image as $file){
-        $name=$file->getClientOriginalName();
-        //$name=date('YmdHis') . "." . $file->getClientOriginalExtension();
-        $request->file('image')->storeAs('images/blog/',$name);
-        $file->move(public_path('images/blog/'),$name);
-        $all_data>image = $name;
-      }
-    }                                                   
-    $all_data>save();                                                 
-    return redirect()->back()->with('message', 'Added Successfully!!');
-}
-public function update(Request $request, $id){
-    $data = Profile::find($id);                           
-    $data->name= $request->name;                                    
-    if($request->hasfile('image')){
-        $destination = 'images/blog/'.$data->image;
-        if(File::exists($destination)){ File::delete($destination); }
-        $file=$request->file('image');
-        //$name=$file->getClientOriginalName();
-        $name=date('YmdHis') . "." . $file->getClientOriginalExtension();
-        $request->file('image')->storeAs('images/blog/',$name);
-        $file->move(public_path('images/blog/'),$name);
-        $data->image = $name;
-    }                                                      
-    $data->update();                                            
-    return redirect()->back()->with('success', 'Updated Successfully Done');  
-}
-public function show($id){
-    $data = Profile::find($id);                                                                                       
-    return view('profile.show', compact('data'));
-} 
-public function edit($id){
-    $data = Profile::find($id);                                          
-    return view('profile.edit', compact('data'));
-} 
-public function delete($id){
-    $data = Profile::find($id);
-    $destination = 'images/blog/'.$data->image;
-    if(File::exists($destination)){ File::delete($destination); }                    
-    $data->delete();                                     
-    return redirect()->back()->with('error', 'Deleted Successfully Done');
-} 
-public function delete($id){
-    $data = Blog::find($id);
-    $destination = public_path('images/blog/'.$data->image);
-    if(file_exists($destination)){ unlink($destination); }                    
-    $data->delete();                                     
-    return redirect()->back()->with('error', 'Deleted Successfully Done');
-}
-public function store(Request $request){
-    $all_data = new Profile;
+   
 
-    $request->validate([
-      'file' => 'required|mimes:pdf,xlx,csv|max:4096',
-    ]);
-    $fileName = $request->file->getClientOriginalName();  
-    $request->file->move(public_path('uploads'), $fileName);
-    $all_data->file=$fileName;
-                                                        
-    $all_data ->name= $request->name;                                            
-    if($request->hasFile('image')) {
-        $file=$request->file('image');
-        //$name=$file->getClientOriginalName();
-        $name=date('YmdHis') . "." . $file->getClientOriginalExtension();
-        $request->file('image')->storeAs('images/blog/',$name);
-        $file->move(public_path('images/blog/'),$name);
-        $all_data->image = $name;
-    }                                              
-    $all_data->save();                                  
-    return redirect()->back()->with('success', 'Added Successfully Done');
-} 
-  
-public function store2(Request $request){
 
-    $request->validate([
-      'title' => 'required|max:255',
-    ]);
-  
-    $profiles = new Profile;
-                                                  
-    $profiles ->title= $request->title;
-                                                        
-    if($request->hasFile('image')) {
-        $file=$request->file('image');
-        $name=$file->getClientOriginalName();
-        $request->file('image')->storeAs('images/blog/',$name);
-        $file->move(public_path('images/blog/'),$name);
-        $profiles->image = $name;
-    }
-                                                        
-    $profiles->save();
-                                                        
-    return redirect()->back()->with('message', 'Added Successfully!!');
-} 
+
+
+
 
 public function show($id){
   $data = User::find($id);
@@ -187,7 +177,9 @@ public function teacherPersonal($email){
   return view('teacher.chat.single', ['email' => $email], compact('peronal_chats'));
 }
           
-Ajker Date Auto niye nibe
+---------------------------------------------------------------------------         
+Ajker Date Auto niye nibe          
+---------------------------------------------------------------------------
 use Carbon\Carbon;
 if(!empty($request->date)){
   $credit->r_date=$request->date;
@@ -195,32 +187,8 @@ if(!empty($request->date)){
 else{
   $credit->r_date= Carbon::today();
 }
-          
-          
-RESIZE    
-          "intervention/image": "^3.0",
-composer require intervention/image
-use Image;
-composer.json
-    "require": {
-        "intervention/image": "^2.7",
-    },   
-    public function categoryStore(Request $request)
-    {
-        $all_data = new Category;
-        $all_data ->name= $request->name;
-        if($request->hasfile('image')){
-            $file = $request->file('image');
-            $name = $file->getClientOriginalName();
-            $path = public_path('/images/category');
-            $img = Image::make($file->path());
-            $img->resize(300, 300)->save($path.'/'.$name);
-            $all_data->image = $name;
-        }
-        $all_data->save();
-        return redirect()->back()->with('success', 'Deleted Successfully');
-    }
-          
+
+      
 DB
 use DB;
 
@@ -252,16 +220,20 @@ $notification = array(
             'alert-type' => 'success'
           );
 return back()->with->($notification);          
-    
-SESSION
+          
+---------------------------------------------------------------------------  
+SESSION          
+---------------------------------------------------------------------------
 public function english(){
   Session::get('lang');
   session()->forget('lang');
   session()->put('lang','english');
   return back();
 }
-          
-CHECK
+            
+---------------------------------------------------------------------------        
+CHECK          
+---------------------------------------------------------------------------
 public function test($course_id,$chapter_id){ 
     $questions = Question::select('*')->where('course_id',$course_id)->where('chapter_id',$chapter_id)->get();
     foreach($questions as $question){
@@ -271,8 +243,10 @@ public function test($course_id,$chapter_id){
     }
     return redirect()->back()->with('delete', 'No MCQ available NOW.');
 } 
-
-ONE FILED STATIC ONE FILED DYNAMIC
+          
+---------------------------------------------------------------------------
+ONE FILED STATIC ONE FILED DYNAMIC          
+---------------------------------------------------------------------------
 <form method="POST" action="{{ route('products.store') }}">
     @csrf
     <div class="form-group">
@@ -304,17 +278,8 @@ public function store(Request $request)
     return redirect()->route('products.index')->with('success', 'Product created successfully.');
 }
 
-return redirect()->route('FreeTest', ['id' => $id])->with('success', 'Thanks'); 
-return redirect()->to("/FreeTest/{$id}")->with('success', 'Thanks'); 
-
-REPORT---------------------------------------------------------------------------------------
-use Carbon\Carbon;
-Earn::latest()->whereMonth('created_at', Carbon::now()->month)->get();
-Earn::latest()->whereDate('created_at',Carbon::yesterday())->get();
-Earn::latest()->whereDate('created_at',Carbon::today())->get();
 
 
-return redirect()->to('/checkout/'.$id);
         </textarea>
       </div>
     </div>
