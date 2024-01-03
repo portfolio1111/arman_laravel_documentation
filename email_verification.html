@@ -25,11 +25,11 @@ class User extends Authenticatable implements MustVerifyEmail
           
 .env
 MAIL_MAILER=smtp
-MAIL_HOST=smtp.googlemail.com
-MAIL_PORT=465
+MAIL_HOST=smtp.googlemail.com / smtp.gmail.com
+MAIL_PORT=465 / 587
 MAIL_USERNAME=arman.p2c@gmail.com
 MAIL_PASSWORD=12345678
-MAIL_ENCRYPTION=ssl
+MAIL_ENCRYPTION=ssl / tls
 MAIL_FROM_ADDRESS="arman.p2c@gmail.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
