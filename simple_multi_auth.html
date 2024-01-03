@@ -140,26 +140,21 @@ public function handle(Request $request, Closure $next, $userType): Response
 }
 
 route/web.php
-use App\Http\Controllers\UserController;
-Auth::routes();
+use App\Http\Controllers\HomeController;
+
 Route::middleware(['auth','user-access:user'])->group(function(){
-  Route::get('/user', [UserController::class, 'user_dashboard']);
+  Route::get('/user', [HomeController::class, 'user_dashboard']);
 });
 Route::middleware(['auth','user-access:admin'])->group(function(){
-  Route::get('/admin', [UserController::class, 'admin_dashboard']);
+  Route::get('/admin', [HomeController::class, 'admin_dashboard']);
 });
 
-php artisan make:controller UserController
-{
-    public function __construct(){
-        $this->middleware('auth');
-    }
-    public function user_dashboard(){
-        return view('user_dashboard');
-    }
-    public function admin_dashboard(){
-        return view('admin_dashboard');
-    }
+HomeController
+public function user_dashboard(){
+    return view('user_dashboard');
+}
+public function admin_dashboard(){
+    return view('admin_dashboard');
 }
 resources/views/user_dashboard.blade.php
 resources/views/admin_dashboard.blade.php
