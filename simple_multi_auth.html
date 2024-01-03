@@ -130,7 +130,6 @@ protected $routeMiddleware/$middlewareAliases = [
 ];
 
 app/Http/Middleware/UserAccess.php
-use Illuminate\Support\Facades\Auth;
 public function handle(Request $request, Closure $next, $userType): Response
 {
     if(auth()->user()->type == $userType){
