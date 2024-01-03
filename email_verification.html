@@ -12,6 +12,17 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+-----------------------------------------------------------------------
+Email Verification At 
+-----------------------------------------------------------------------
+https://mailtrap.io/
+My Inbox -> cURL -> Laravel Latest Version [copy] [paste->.env]
+          
+User.php
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+class User extends Authenticatable implements MustVerifyEmail
+
+          
 forget password
 https://www.itsolutionstuff.com/post/laravel-10-custom-forgot-password-exampleexample.html#google_vignette
 
@@ -20,10 +31,7 @@ https://www.itsolutionstuff.com/post/laravel-10-custom-forgot-password-exampleex
           
 web.php
 Auth::routes(['verify' => true]);
-          
-User.php
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-class User extends Authenticatable implements MustVerifyEmail
+
           
 HomeController.php
     public function __construct()
