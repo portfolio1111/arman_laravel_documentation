@@ -28,6 +28,41 @@ npm run dev
           
 php artisan serve
 -----------------------------------------------------------------------
+breeze multi auth
+-----------------------------------------------------------------------
+composer create-project laravel/laravel auth 
+          
+database config -> .end 
+$table->string('type')->default('user');
+          
+-> got to work_place ->    
+php artisan migrate     
+composer require laravel/breeze --dev
+php artisan breeze:install
+npm install
+npm run dev   
+          
+php artisan serve
+
+RouteServiceProvider.php
+'/home'
+php artisan make:controller HomeController
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+public function index(){
+  if(Auth::id()){
+    $type = Auth::user()->type;
+    if($type=='user'){ return view('user'); }
+    else if($type=='admin'){ return view('admin'); }
+  }
+}
+
+web.php
+use App\Http\Controllers\HomeController;
+Route::get('/home',[HomeController::class, 'index']);
+
+
+-----------------------------------------------------------------------
 2
 -----------------------------------------------------------------------
 composer create-project laravel/laravel auth
