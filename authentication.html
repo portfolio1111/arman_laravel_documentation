@@ -54,8 +54,8 @@ public function index(){
     $type = Auth::user()->type;
     if($type=='user'){ return view('user'); }
     else if($type=='admin'){ return view('admin'); }
-    else{ return view('welcome'); }
   }
+  else{ return view('welcome'); }
 }
 
 web.php
