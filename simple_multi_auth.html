@@ -17,10 +17,10 @@
 -----------------------------------------------------------------------
 composer create-project laravel/laravel auth 
           
-database config -> .end     
-php artisan migrate
-
--> got to work_place ->      
+database config -> .end 
+          
+-> got to work_place ->    
+php artisan migrate     
 composer require laravel/breeze --dev
 php artisan breeze:install
 npm install
@@ -35,9 +35,9 @@ composer create-project laravel/laravel multi_auth
 database config -> .end 
 database/migration/users
 $table->string('type')->default(0)->comment('0->User,1->Admin');
-php artisan migrate
 
--> got to work_place ->      
+-> got to work_place ->  
+php artisan migrate    
 composer require laravel/breeze --dev
 php artisan breeze:install
 npm install
@@ -95,9 +95,9 @@ composer create-project laravel/laravel multi_auth
 database config -> .end       
 database/migration/users
 $table->string('type')->default(0)->comment('0->User,1->Admin');
-php artisan migrate
 
 -> got to work_place ->
+php artisan migrate
 composer require laravel/ui 
 php artisan ui bootstrap --auth   
 npm install
