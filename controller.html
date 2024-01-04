@@ -38,8 +38,8 @@ public function store(Request $request){
         $data->image = $imageName;
     } 
     if($request->hasFile('image')) {
-        $imageName = time().".".$request->->file('image')->extension();
-        $request->->file('image')->move(public_path('images/blogs/'),$imageName);
+        $imageName = time().".".$request->file('image')->extension();
+        $request->file('image')->move(public_path('images/blogs/'),$imageName);
         $data->image = $imageName;
     } 
     $data->save();                                                 
@@ -106,7 +106,13 @@ if($request->hasFile('image')) {
     $img->resize(300,300)->save($path.'/'.$imageName);
     $data->image = $imageName;
 } 
-          
+if($request->hasFile('image')) {
+    $imageName = time().".".$request->file('image')->extension();          
+    $path = public_path('images/blogs');
+    $img = Image::make($file->path());
+    $img->resize(300,300)->save($path.'/'.$imageName);
+    $data->image = $imageName;
+}        
 ---------------------------------------------------------------------------
 DIFFERENT IMAGE   
 ---------------------------------------------------------------------------        
