@@ -25,6 +25,30 @@ Products  {{ session('productCount', 0) }}
         {{ session()->get('message') }}
     </div>
 @endif
+
+--------------------------------------------------------------------------
+ALERT
+--------------------------------------------------------------------------
+          @if(session()->has('status'))
+          <div id="myAlert" class="myAlert alert alert-primary alert-dismissible fade show text-center" role="alert">
+            <strong>{{ session()->get('status') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
+
+          <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  setTimeout(function () {
+                      var myAlert = document.getElementById('myAlert');
+                      if (myAlert) {
+                        myAlert.classList.add('fade');
+                          setTimeout(function () { myAlert.remove(); }, 1000);
+                      }
+                  }, 500);
+              });
+          </script>
+
+          
         </textarea>
       </div>
     </div>
