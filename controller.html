@@ -98,18 +98,10 @@ RESIZE IMAGE
 composer require intervention/image:^2.7
 use Image; 
 if($request->hasFile('image')) {
-    $file=$request->file('image');
-    $imageName=date('YmdHis') . "." . $file->getClientOriginalName();
+    $imageName = time().".".$request->file('image')->extension();
           
-    $path = public_path('/images/blogs');
-    $img = Image::make($file->path());
-    $img->resize(300,300)->save($path.'/'.$imageName);
-    $data->image = $imageName;
-} 
-if($request->hasFile('image')) {
-    $imageName = time().".".$request->file('image')->extension();          
-    $path = public_path('images/blogs');
-    $img = Image::make($file->path());
+    $path = public_path('images/blogs/');
+    $img = Image::make($request->file('image')->path());
     $img->resize(300,300)->save($path.'/'.$imageName);
     $data->image = $imageName;
 }        
