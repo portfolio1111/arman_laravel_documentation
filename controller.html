@@ -36,7 +36,12 @@ public function store(Request $request){
         $request->file('image')->storeAs('images/blogs/',$imageName);
         $file->move(public_path('images/blogs/'),$imageName);
         $data->image = $imageName;
-    }  
+    } 
+    if($request->hasFile('image')) {
+        $imageName = time().".".$request->->file('image')->extension();
+        $request->->file('image')->move(public_path('images/blogs/'),$imageName);
+        $data->image = $imageName;
+    } 
     $data->save();                                                 
     return redirect()->back();
 }
