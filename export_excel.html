@@ -27,6 +27,8 @@ config/app.php
 ],
 
 php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+
+Export--------------------------------------------------------
 php artisan make:export UserExport --model=User
 
 app/exports/UserExport.php
@@ -40,18 +42,11 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class StudentsExport implements FromCollection, WithHeadings
 {
     public function collection(){
-        return User::select('id', 'name', 'mobile', 'college', 'address', 'remark')->where('type', 3)->orderBy('id', 'DESC')->get();
+        return User::select('id', 'name', 'email')->get();
     }
 
     public function headings(): array{
-        return [
-            '#',
-            'Name',
-            'Mobile',
-            'College',
-            'Address',
-            'Remark',
-        ];
+        return [ '#', 'Name', 'Email'];
     }
 }
 
@@ -64,6 +59,34 @@ public function user_export(){
 }
 web.php
 Route::get('/user_export', [UserController::class, 'user_export']);
+
+
+Import--------------------------------------------------------
+php artisan make:import UserImport --model=User   
+
+
+app/imports/UserImport.php
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+class UsersImport implements ToModel, WithHeadingRow
+{
+    public function model(array $row){
+        return new User([
+            'name'     => $row['name'],
+            'email'    => $row['email'], 
+        ]);
+    }
+}   
+
+UserController.php        
+use App\Imports\UserImport;
+use Maatwebsite\Excel\Facades\Excel;
+
+public function user_import() {
+    Excel::import(new UserImport,request()->file('file')); 
+    return back();
+}
+web.php
+Route::post('/user_import', [BlogController::class, 'user_import']);
 
 ---------------------------------------------------------------------
 
