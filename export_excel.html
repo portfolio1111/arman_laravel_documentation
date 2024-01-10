@@ -12,6 +12,62 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control">  
+
+composer require maatwebsite/excel
+   
+config/app.php       
+'providers' => [
+    // ...
+    Maatwebsite\Excel\ExcelServiceProvider::class,
+],
+
+'aliases' => [
+    // ...
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+],
+
+php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+php artisan make:export UserExport --model=User
+
+app/exports/UserExport.php
+<?php
+namespace App\Exports;
+
+use App\User;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
+class StudentsExport implements FromCollection, WithHeadings
+{
+    public function collection(){
+        return User::select('id', 'name', 'mobile', 'college', 'address', 'remark')->where('type', 3)->orderBy('id', 'DESC')->get();
+    }
+
+    public function headings(): array{
+        return [
+            '#',
+            'Name',
+            'Mobile',
+            'College',
+            'Address',
+            'Remark',
+        ];
+    }
+}
+
+UserController.php        
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+public function user_export(){
+    return Excel::download(new UserExport, 'users.xlsx');
+}
+web.php
+Route::get('/user_export', [UserController::class, 'user_export']);
+
+---------------------------------------------------------------------
+
+          
 https://www.itsolutionstuff.com/post/laravel-9-import-export-excel-and-csv-file-tutorialexample.html
           
 composer require maatwebsite/excel
@@ -81,52 +137,6 @@ class BlogsExport implements FromQuery,WithHeadings{
 
 ?>
 ---------------------------------------------------------------
-composer require maatwebsite/excel
-'providers' => [
-    // ...
-    Maatwebsite\Excel\ExcelServiceProvider::class,
-],
-
-'aliases' => [
-    // ...
-    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-],
-php artisan make:export StudentsExport --model=User
-<?php
-
-namespace App\Exports;
-
-use App\User;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-
-class StudentsExport implements FromCollection, WithHeadings
-{
-    public function collection()
-    {
-        return User::select('id', 'name', 'mobile', 'college', 'address', 'remark')->where('type', 3)->orderBy('id', 'DESC')->get();
-    }
-
-    public function headings(): array
-    {
-        return [
-            '#',
-            'Name',
-            'Mobile',
-            'College',
-            'Address',
-            'Remark',
-        ];
-    }
-}
-use App\Exports\StudentsExport;
-use Maatwebsite\Excel\Facades\Excel;
-
-public function export()
-{
-    return Excel::download(new StudentsExport, 'students.xlsx');
-}
-Route::get('/admin/user/export', 'YourControllerName@export');
 ------------------------------------------------------------------
         </textarea>
       </div>
