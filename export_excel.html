@@ -14,6 +14,8 @@
         <textarea cols="200" rows="20" class="form-control">  
 
 composer require maatwebsite/excel
+composer require maatwebsite/excel:^3.1
+composer require maatwebsite/excel --ignore-platform-req=ext-zip
    
 config/app.php       
 'providers' => [
@@ -99,7 +101,6 @@ Route::post('/user_import', [BlogController::class, 'user_import']);
 https://www.itsolutionstuff.com/post/laravel-9-import-export-excel-and-csv-file-tutorialexample.html
           
 composer require maatwebsite/excel
-composer require maatwebsite/excel:^3.1
 composer require maatwebsite/excel:*
 composer.json
 "maatwebsite/excel": "3.1.48",
