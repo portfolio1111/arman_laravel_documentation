@@ -64,7 +64,6 @@ Route::get('/user_export', [UserController::class, 'user_export']);
 Import--------------------------------------------------------
 php artisan make:import UserImport --model=User   
 
-
 app/imports/UserImport.php
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class UsersImport implements ToModel, WithHeadingRow
@@ -87,7 +86,13 @@ public function user_import() {
 }
 web.php
 Route::post('/user_import', [BlogController::class, 'user_import']);
-
+            
+<form action="{{ url('/user_import') }}" method="POST" enctype="multipart/form-data"> @csrf
+  <div class="input-group mb-3">
+    <input type="file" name="file" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+    <button class="btn btn-dark" type="submit" id="button-addon1">Import</button>
+  </div>
+</form>
 ---------------------------------------------------------------------
 
           
