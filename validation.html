@@ -118,6 +118,16 @@ LOGIN VALIDATION-------------------------------
             'email.exists'=>'Email not found.' , 
             'password.min'=>'The password field must be at least 8 characters.' , 
         ]);
+REGISTER VALIDATION-------------------------------
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ],[
+            'email.unique'=>'The email has already been taken.' , 
+            'password.min'=>'The password field must be at least 8 characters.' , 
+            'password.confirmed'=>'The password field confirmation does not match.' , 
+        ]);
         </textarea>
       </div>
     </div>
