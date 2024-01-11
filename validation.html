@@ -96,7 +96,28 @@ LOGIN
 
           
     }
-          
+
+
+LOGIN VALIDATION-------------------------------
+        $this->validate($request, [
+            'email' => 'required|email|exists:users,email',
+            'password' => [
+                'required','min:8',
+                function ($attribute, $value, $fail) use ($request) {
+                    $user = User::where('email', $request->email)->first();
+                    if($user){
+                        if (!$user || !Hash::check($value, $user->password)) {
+                            // $fail($attribute . ' is incorrect.');
+                            $fail('Password does not match.');
+                        }
+                    }
+                    else{ $fail(''); } 
+                },
+            ],
+        ],[
+            'email.exists'=>'Email not found.' , 
+            'password.min'=>'The password field must be at least 8 characters.' , 
+        ]);
         </textarea>
       </div>
     </div>
