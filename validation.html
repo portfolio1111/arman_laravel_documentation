@@ -19,8 +19,10 @@ $request->validate([
 ]);
 
 $this->validate($request, [
-    'name' => 'required|exists:users,email|unique:users|string|image|mimes:jpeg,png,jpg,gif,bmp|nullable|date|min:22|max:2048|mimetypes:video/avi,video/mpeg,video/quicktime|array|numeric|email|confirmed',
-    'name' => ['required','max:255'],
+    'name' => 'required|exists:users,email|unique:users|string|nullable|date|min:22|max:255|array|numeric|confirmed',
+    'email' => 'exists:users,email|email',
+    'image' => 'image|mimes:jpeg,png,jpg,gif,bmp|max:2048',
+    'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime|',
 ],
 [
     'name.required'=>'Message Pass ...'    
