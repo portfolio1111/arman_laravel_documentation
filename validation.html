@@ -19,10 +19,11 @@ $request->validate([
 ]);
 
 $this->validate($request, [
-    'course_id'=>'required'
+    'name' => 'required|exists:users,email|unique:users|string|image|mimes:jpeg,png,jpg,gif,bmp|nullable|date|min:22|max:2048|mimetypes:video/avi,video/mpeg,video/quicktime|array|numeric|email|confirmed',
+    'name' => ['required','max:255'],
 ],
 [
-    'course_id.required'=>'Please give a Course'    
+    'name.required'=>'Message Pass ...'    
 ]);
           
 return back()->flash('status', 'Task was successful!')          
@@ -37,23 +38,7 @@ $validator = Validator::make($request->all(), $rules);
 if ($validator->fails()) {
     return redirect()->back()->with('error','Please give a valid mobile number');
 }
-          
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'title' => 'required|string|unique:posts|max:255',
-        'title' => ['required', 'unique:posts', 'max:255'],
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
-        'body' => 'required',
-        'publish_at' => 'nullable|date',
-        'photo' => 'mimes:jpg,bmp,png',
-        'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime',
-        'prices' => 'required|array',
-        'prices.*' => 'numeric',
-    ]);
 
-    // The blog post is valid...
-}
 
 @if ($errors->any())
     <div class="alert alert-danger">
