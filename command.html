@@ -55,6 +55,7 @@ php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" -
 
 php artisan make:seeder UserSeeder
 php artisan migrate:fresh --seed
+php artisan migrate:fresh --seed --seeder=UserSeeder
           
 composer require laravel/breeze --dev
 php artisan breeze:install
