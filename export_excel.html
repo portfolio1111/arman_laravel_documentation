@@ -166,6 +166,39 @@ class BlogsExport implements FromQuery,WithHeadings{
 
 ?>
 ---------------------------------------------------------------
+<a href="{{url('/free_mcq_questions_export',$free_mcq->id)}}" class="btn btn-dark">Export</a>
+Route::get('/free_mcq_questions_export/{free_mcq_id}', [FreeMcqQuestionController::class, 'free_mcq_questions_export']);
+
+    public function free_mcq_questions_export($free_mcq_id){
+        return Excel::download(new FreeMcqQuestionExport($free_mcq_id), 'questions.xlsx');
+    }
+
+use Illuminate\Support\Collection;
+{
+    protected $free_mcq_id;
+
+    public function __construct($free_mcq_id){
+        $this->free_mcq_id = $free_mcq_id;
+    }
+    public function collection()
+    {
+        return FreeMcqQuestion::where('free_mcq_id', $this->free_mcq_id)->select('id','free_mcq_id','question','option1','option2','option3','option4','answer','explanation')->get();
+        // return FreeMcqQuestion::all();
+    }
+    public function headings(): array{
+        return [
+            'ID',
+            'Free_Mcq_Id',
+            'Question',
+            'Option1',
+            'Option2',
+            'Option3',
+            'Option4',
+            'Answer',
+            'Explanation',
+        ];
+    }
+}
 ------------------------------------------------------------------
         </textarea>
       </div>
