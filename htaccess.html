@@ -12,7 +12,12 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control">   
-          
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+    
 <IfModule mod_rewrite.c>
 RewritwEngine On
 RewriteRule ^(.*)$ public/$1 [L]
