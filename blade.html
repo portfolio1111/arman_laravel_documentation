@@ -24,6 +24,9 @@ cache not working
 $imagePath = public_path('path/to/image.jpg');
 return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
 
+browser chache clear
+<link rel="stylesheet" href="{{asset('/SurfsideMedia/assets/css/main.css')}}?version={{ time() }}">
+
 {{ optional($data->category)->id }}
           
 @foreach ($blogs as $data)
