@@ -24,6 +24,16 @@ cache not working
 $imagePath = public_path('path/to/image.jpg');
 return response()->file($imagePath)->header('Cache-Control', 'no-cache, must-revalidate');
 
+"," paile line break hobe
+@foreach ($courses as $data)
+    @php $descriptions = explode(',', $data->description); @endphp
+    <ul>
+    @foreach ($descriptions as $description)
+        <li>{{$description}}</li>
+    @endforeach
+    </ul>
+ @endforeach
+          
 browser chache clear
 <link rel="stylesheet" href="{{asset('/SurfsideMedia/assets/css/main.css')}}?version={{ time() }}">
 
