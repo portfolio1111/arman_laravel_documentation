@@ -253,6 +253,8 @@ public function test($course_id,$chapter_id){
     }
     return redirect()->back()->with('delete', 'No MCQ available NOW.');
 } 
+
+if(auth()->check()){}
           
 ---------------------------------------------------------------------------
 ONE FILED STATIC ONE FILED DYNAMIC          
