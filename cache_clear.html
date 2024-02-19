@@ -25,6 +25,9 @@ Route::get('/clear-cache-all', function() {
     dd("Cache Clear All");
 });
 Route::get('/clear-all', function() { Artisan::call('optimize:clear'); return redirect()->to('/'); });
+Route::get('/shamim-fresh', function() { Artisan::call('migrate:fresh'); return redirect()->to('/'); });
+Route::get('/shamim-fresh-seed', function() { Artisan::call('migrate:fresh --seed'); return redirect()->to('/'); });
+
         </textarea>
       </div>
     </div>
