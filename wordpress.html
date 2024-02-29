@@ -86,6 +86,15 @@ Slider, Gallery, and Carousel by MetaSlider – Responsive WordPress Slideshows
 Responsive Menu – Create Mobile-Friendly Menu
 
 
+Apperance->Theme File Editor->
+header.php
+-------------------
+<?php 
+	if(is_front_page()){
+	echo do_shortcode('[metaslider id="49"]'); 
+	}
+?>
+
 soo demo importer
 SoftTech IT 
 bKash WordPress Payment
