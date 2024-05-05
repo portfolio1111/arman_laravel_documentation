@@ -16,6 +16,38 @@ composer require jeroendesloovere/vcard:dev-2.0.0-dev
 
 Route::get('/save/vcf',  [WelcomeController::class, 'vcf']);
 
+my mobile working
+-------------------------------------------
+    public function vcf($id){
+        $vcard = null;
+        $formatter = new Formatter(new VcfFormatter(), 'vcard-export');
+        $user = User::find($id);
+
+        $lastname = "";
+        $firstname = $user["name"];
+        $additional = "";
+        $prefix = "";
+        $suffix = "";
+        $number = $user->number;
+        $email = $user->email;
+
+        $vcard = new VCard();
+    
+        $vcard->add(new Telephone($number));
+        $vcard->add(new Name($lastname, $firstname, $additional, $prefix, $suffix));
+        $vcard->add(new Email($email));
+    
+        $formatter->addVCard($vcard);
+    
+        $content = $formatter->download();
+    
+        return response($content, 200, [
+            'Content-Type' => 'text/x-vcard',
+            'Content-Disposition' => 'attachment; filename="contact.vcf"'
+        ]);
+
+    }
+-------------------------------------        
 use JeroenDesloovere\VCard\VCard;
 use JeroenDesloovere\VCard\Property\Name;
 use JeroenDesloovere\VCard\Formatter\VcfFormatter;
