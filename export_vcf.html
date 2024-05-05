@@ -18,6 +18,12 @@ Route::get('/save/vcf',  [WelcomeController::class, 'vcf']);
 
 my mobile working
 -------------------------------------------
+use JeroenDesloovere\VCard\VCard;
+use JeroenDesloovere\VCard\Property\Name;
+use JeroenDesloovere\VCard\Formatter\VcfFormatter;
+use JeroenDesloovere\VCard\Property\Telephone;
+use JeroenDesloovere\VCard\Property\Email;
+use JeroenDesloovere\VCard\Formatter\Formatter;
     public function vcf($id){
         $vcard = null;
         $formatter = new Formatter(new VcfFormatter(), 'vcard-export');
