@@ -70,16 +70,18 @@ return $vcard->getOutput();
         
         $vcard->addName($lastname, $firstname, $additional, $prefix, $suffix);
         
-        $vcard->addCompany('');
+        // $vcard->addCompany('');
+        // $vcard->addRole('');
+        // $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
+        // $vcard->addLabel('street, worktown, workpostcode Belgium');
         $vcard->addJobtitle($user["designation"]);
-        $vcard->addRole('');
         $vcard->addEmail($user["email"]);
         $vcard->addPhoneNumber($user["number"], 'PREF;WORK');
         $vcard->addPhoneNumber($user["whatsapp"], 'WhatsApp');
-        $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
-        $vcard->addLabel('street, worktown, workpostcode Belgium');
         $vcard->addURL($user["facebook"]);
-        
+          
+        $vcard->addPhoto(public_path('images/users/' . $user["image"]));
+          
         $content = $vcard->download();
         
         return response($content, 200, [
