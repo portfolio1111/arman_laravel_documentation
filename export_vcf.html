@@ -56,6 +56,38 @@ return $vcard->getOutput();
           
 }
 
+
+    public function vcf($id){
+        $user = User::find($id);
+    
+        $vcard = new VCard();
+        
+        $lastname = '';
+        $firstname = $user["name"];
+        $additional = '';
+        $prefix = '';
+        $suffix = '';
+        
+        $vcard->addName($lastname, $firstname, $additional, $prefix, $suffix);
+        
+        $vcard->addCompany('');
+        $vcard->addJobtitle($user["designation"]);
+        $vcard->addRole('');
+        $vcard->addEmail($user["email"]);
+        $vcard->addPhoneNumber($user["number"], 'PREF;WORK');
+        $vcard->addPhoneNumber($user["whatsapp"], 'WhatsApp');
+        $vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
+        $vcard->addLabel('street, worktown, workpostcode Belgium');
+        $vcard->addURL($user["facebook"]);
+        
+        $content = $vcard->download();
+        
+        return response($content, 200, [
+            'Content-Type' => 'text/x-vcard',
+            'Content-Disposition' => 'attachment; filename="contact.vcf"'
+        ]);
+    }
+          
 system 2 [working]
 --------------------------------------------------------------
 https://www.youtube.com/watch?v=1th42YyQKiI&list=LL&index=1
