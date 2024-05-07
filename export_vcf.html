@@ -12,6 +12,53 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+system 1
+--------------------------------------------------------------
+https://www.youtube.com/watch?v=P00L1fFar7E&t=153s
+composer require jeroendesloovere/vcard
+Route::get('/test',  [WelcomeController::class, 'test']);
+use JeroenDesloovere\VCard\VCard;
+public function test(Request $request){
+          
+// define vcard
+$vcard = new VCard();
+
+// define variables
+$lastname = 'Desloovere';
+$firstname = 'Jeroen';
+$additional = '';
+$prefix = '';
+$suffix = '';
+
+// add personal data
+$vcard->addName($lastname, $firstname, $additional, $prefix, $suffix);
+
+// add work data
+$vcard->addCompany('Siesqo');
+$vcard->addJobtitle('Web Developer');
+$vcard->addRole('Data Protection Officer');
+$vcard->addEmail('info@jeroendesloovere.be');
+$vcard->addPhoneNumber(1234121212, 'PREF;WORK');
+$vcard->addPhoneNumber(123456789, 'WORK');
+$vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
+$vcard->addLabel('street, worktown, workpostcode Belgium');
+$vcard->addURL('http://www.jeroendesloovere.be');
+
+$vcard->addPhoto(public_path'abc.jpeg');
+
+// return vcard as a string
+return $vcard->getOutput();
+
+// return vcard as a download
+//return $vcard->download();
+          
+}
+
+system 2
+--------------------------------------------------------------
+
+
+          
 https://packagist.org/packages/jeroendesloovere/vcard
 https://www.youtube.com/watch?v=P00L1fFar7E
 https://www.youtube.com/watch?v=1th42YyQKiI&list=LL&index=1
