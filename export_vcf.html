@@ -124,6 +124,38 @@ public function vcf(){
 }
 
 
+system 3
+--------------------------------------------------------------
+https://github.com/Astrotomic/laravel-vcard
+composer require astrotomic/laravel-vcard
+use Astrotomic\Vcard\Properties\Email;
+use Astrotomic\Vcard\Properties\Gender;
+use Astrotomic\Vcard\Properties\Kind;
+use Astrotomic\Vcard\Properties\Tel;
+use Astrotomic\Vcard\Vcard;
+use Carbon\Carbon;
+
+Vcard::make()
+    ->kind(Kind::INDIVIDUAL)
+    ->gender(Gender::MALE)
+    ->fullName('John Adam Smith')
+    ->name('Smith', 'John', 'Adam')
+    ->email('john.smith@mail.com')
+    ->email('john.smith@company.com', [Email::WORK, Email::INTERNET])
+    ->tel('+1234567890', [Tel::HOME, Tel::VOICE])
+    ->tel('+0987654321', [Tel::WORK, Tel::VOICE])
+    ->tel('+0123456789', [Tel::CELL, Tel::VOICE])
+    ->url('https://johnsmith.com')
+    ->url('https://company.com')
+    ->bday(Carbon::parse('1990-06-24'))
+    ->adr('','','1600 Pennsylvania Ave NW', 'Washington', 'DC', '20500-0003', 'USA')
+    ->photo('data:image/jpeg;base64,'.base64_encode(file_get_contents(__DIR__.'/stubs/photo.jpg')))
+    ->title('V. P. Research and Development')
+    ->role('Excecutive')
+    ->org('Google', 'GMail Team', 'Spam Detection Squad')
+    ->member('john.smith@company.com', '550e8400-e29b-11d4-a716-446655440000')
+    ->note('Hello world')
+;
           
         </textarea>
       </div>
