@@ -12,7 +12,34 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control">
-
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+<table class="datatable"></table>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.1.0/tinymce.min.js" integrity="sha512-Va3PZJRSZ8TlnqUfjkA5YPR57+oIscCVoNGjYK1JYsOTw8VU7517hHqs90/h/YuUm8KZl9iD+Dt8K6T8uAJCqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    (function() {
+      "use strict";
+      /**
+       * Easy selector helper function
+       */
+      const select = (el, all = false) => {
+        el = el.trim()
+        if (all) {
+          return [...document.querySelectorAll(el)]
+        } else {
+          return document.querySelector(el)
+        }
+      }
+      /**
+       * Initiate Datatables
+       */
+      const datatables = select('.datatable', true)
+      datatables.forEach(datatable => {
+        new simpleDatatables.DataTable(datatable);
+      })
+    })();
+</script>
+----------------------------------------------------------------------------    
 https://datatables.net/manual/installation
           
 <!--myDataTables-->
