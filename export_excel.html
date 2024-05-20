@@ -12,6 +12,18 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control">  
+<button id="exportButton" class="btn btn-primary mb-3">Export to Excel</button>
+<table id="exportDataTable" class="table">
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script>
+  document.getElementById('exportButton').addEventListener('click', function () {
+    var table = document.getElementById('exportDataTable');
+    var workbook = XLSX.utils.table_to_book(table, {sheet: "Sheet JS"});
+    XLSX.writeFile(workbook, 'table_data.xlsx');
+  });
+</script>
+--------------------------------------------------------------------------------
+          
 
 composer require maatwebsite/excel
 composer require maatwebsite/excel:^3.1
