@@ -12,6 +12,176 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+Google Auth With Getstrem
+-----------------------------------------------------------------------
+composer create-project laravel/laravel google_login    
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+npm install
+npm run dev
+composer require laravel/socialite
+
+$table->string('google_id')->nullable();
+php artisan migrate
+php artisan make:controller GoogleController
+
+app/Models/User.php
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
+  
+class User extends Authenticatable
+{
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'google_id'
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
+    ];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+    protected $appends = [
+        'profile_photo_url',
+    ];
+}
+
+config/services.php
+return [
+    ....
+    'google' => [
+        'client_id' => '456067358213-dpg9jf939o5lds2c06m4pdl68sldbrqp.ARMANapps.googleusercontent.com',
+        'client_secret' => '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fnKRv',
+        'redirect' => 'http://localhost:8000/auth/google/callback',
+    ],
+]
+
+app/Http/routes.php  
+use App\Http\Controllers\GoogleController;
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
+use Exception;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+  
+class GoogleController extends Controller
+{
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleGoogleCallback()
+    {
+        try {
+      
+            $user = Socialite::driver('google')->user();
+       
+            $finduser = User::where('google_id', $user->id)->first();
+       
+            if($finduser){
+       
+                Auth::login($finduser);
+      
+                return redirect()->intended('dashboard');
+       
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id'=> $user->id,
+                    'password' => encrypt('123456dummy')
+                ]);
+      
+                Auth::login($newUser);
+      
+                return redirect()->intended('dashboard');
+            }
+      
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+}
+
+resources/views/auth/login.blade.php
+<x-guest-layout>
+    <x-authentication-card>
+        <x-slot name="logo">
+        <x-authentication-card-logo />
+        </x-slot>
+ 
+        <x-validation-errors class="mb-4" />
+  
+        @if (session('status'))
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ session('status') }}
+            </div>
+        @endif
+  
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+ 
+            <div>
+                <x-label value="Email" />
+                <x-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            </div>
+  
+            <div class="mt-4">
+                <x-label value="Password" />
+                <x-input class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            </div>
+  
+            <div class="block mt-4">
+                <label class="flex items-center">
+                    <input type="checkbox" class="form-checkbox" name="remember">
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>
+            </div>
+  
+            <div class="flex items-center justify-end mt-4">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
+  
+                <x-button class="ml-4">
+                    {{ __('Login') }}
+                </x-button>
+            </div>
+            <div class="flex items-center justify-end mt-4">
+                <a href="{{ url('auth/google') }}">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                </a>
+            </div>
+        </form>
+    </x-authentication-card>
+</x-guest-layout>
+
+
+
 -----------------------------------------------------------------------
 BREEZE SINGLE AUTH
 -----------------------------------------------------------------------
