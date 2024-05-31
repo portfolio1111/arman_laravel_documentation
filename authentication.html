@@ -62,7 +62,10 @@ class User extends Authenticatable
     ];
 }
 
+https://console.cloud.google.com/apis/dashboard
+
 config/services.php
+using any app -> Credentials -> +Create -> 0Auth client ID -> Web Application -> + ADD URI [http://localhost:8000] + ADD URI [http://localhost:8000/auth/google/callback] CREATE
 return [
     ....
     'google' => [
