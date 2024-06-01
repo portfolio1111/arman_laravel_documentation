@@ -15,10 +15,10 @@
       <div class="row">
         <div class="col-12">
           <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#1">Command</a>
-          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#2">routes/web.php</a>
-          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#3">resources/views/livewire/Product.blade.php</a>
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#5">app/Livewire/Counter.php</a>
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#3">resources/views/livewire/counter.blade.php</a>
           <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#4">mastering</a>
-          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#5">app/Livewire/CreatePost.php</a>
+          <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#2">routes/web.php</a>
           <a href="" class="btn btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#6">blade</a>
 <!-- 1----------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <div class="modal fade" id="1" tabindex="-1" aria-labelledby="ProfileControllerModalLabel" aria-hidden="true">
@@ -30,8 +30,19 @@
       <div class="modal-body">
         <textarea cols="200" rows="15" class="form-control">
 composer require livewire/livewire
+php artisan make:livewire counter
+php artisan make:livewire counter --inline [no blade]
+
+<button wire:click="increment">Increment</button>
+<button wire:keydownenter="press_enter">Press Enter</button>
+
+<input type="text" wire:model="message" placeholder="Search" />
+<input type="text" wire:model.debounce.1000ms="message" placeholder="Search" />
+<input type="text" wire:model.lazy="message" placeholder="Search" />
+
+<form wire:submit.prevent="method_name"></form>
+          
 php artisan livewire:layout
-php artisan make:livewire Product
 php artisan make:livewire Posts\\CreatePost
 php artisan make:livewire posts.create-post
 
@@ -72,7 +83,14 @@ Route::get('/Product', Counter::class);
       </div>
       <div class="modal-body">
         <textarea cols="200" rows="15" class="form-control">
-3
+<div>
+    {{ $message }}
+    @foreach ($posts as $post)
+        <div wire:key="{{ $post->id }}"> 
+            <!-- ... -->
+        </div>
+    @endforeach
+</div>
         </textarea>
       </div>
       <div class="modal-footer">
@@ -92,24 +110,14 @@ Route::get('/Product', Counter::class);
         <textarea cols="200" rows="15" class="form-control">
 <html>
 <head>
-    ...
-    @livewireStyles
-</head>
-<body>
-    ...
-    @livewireScripts
-</body>
-</html>
-
-<html>
-<head>
     <!-- ... -->
     @livewireStyles
     @vite(['resources/js/app.js'])
 </head>
 <body>
     {{ $slot }}
- 
+    @livewire('counter')
+    <livewire:counter />
     @livewireScriptConfig 
 </body>
 </html>
@@ -136,11 +144,18 @@ namespace App\Livewire;
  
 use Livewire\Component;
  
-class CreatePost extends Component
+class Counter extends Component
 {
+    public function mount(){}
+    public function hydrate(){} [work with button]
+    public function updated(){} [work with input]
+    public $count = 0;
+    public function increment(){
+      $this->count++;
+    } 
     public function render()
     {
-        return view('livewire.create-post');
+        return view('livewire.counter');
     }
 }
         </textarea>
@@ -161,6 +176,7 @@ class CreatePost extends Component
       <div class="modal-body">
         <textarea cols="200" rows="15" class="form-control">
 <div>
+    {{ $message }}
     @foreach ($posts as $post)
         <div wire:key="{{ $post->id }}"> 
             <!-- ... -->
