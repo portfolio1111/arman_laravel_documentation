@@ -36,7 +36,7 @@ php artisan make:livewire counter --inline [no blade]
 <button wire:click="increment">Increment</button>
 <button wire:keydownenter="press_enter">Press Enter</button>
 
-<input type="text" wire:model="message" placeholder="Search" />
+<input type="text" wire:model.live="message" placeholder="Search" />
 <input type="text" wire:model.debounce.1000ms="message" placeholder="Search" />
 <input type="text" wire:model.lazy="message" placeholder="Search" />
 
@@ -110,15 +110,17 @@ Route::get('/Product', Counter::class);
         <textarea cols="200" rows="15" class="form-control">
 <html>
 <head>
-    <!-- ... -->
     @livewireStyles
+
     @vite(['resources/js/app.js'])
 </head>
 <body>
     {{ $slot }}
     @livewire('counter')
     <livewire:counter />
-    @livewireScriptConfig 
+    @livewireScriptConfig
+ 
+    @livewireScripts 
 </body>
 </html>
         </textarea>
@@ -153,6 +155,7 @@ class Counter extends Component
     public function increment(){
       $this->count++;
     } 
+    public $message = "";
     public function render()
     {
         return view('livewire.counter');
