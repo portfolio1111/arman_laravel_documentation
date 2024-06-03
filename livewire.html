@@ -37,7 +37,7 @@ php artisan make:livewire counter --inline [no blade]
 <button wire:keydownenter="press_enter">Press Enter</button>
 
 <input type="text" wire:model.live="message" placeholder="Search" />
-<input type="text" wire:model.debounce.1000ms="message" placeholder="Search" />
+<input type="text" wire:model.live.debounce.1000ms="message" placeholder="Search" />
 <input type="text" wire:model.lazy="message" placeholder="Search" />
 
 <form wire:submit.prevent="method_name"></form>
