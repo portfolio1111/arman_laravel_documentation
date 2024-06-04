@@ -86,7 +86,7 @@ class ProfileController extends Controller
 FORM1
 <form action="{{url('/store-profile-one')}}" method="post" class="card p-3"> @csrf
   <div class="col-12">
-  <input type="text" name="name" value="{{ $profile->name ?? '' }}" placeholder="Enter name" class="form-control @error('name') is-invalid @enderror">
+  <input type="text" name="name" value="{{ old('name', $profile->name ?? '') }}" placeholder="Enter name" class="form-control @error('name') is-invalid @enderror">
   @error('name') <span class="text-danger">{{$message}}</span> @enderror
   </div>
   <div class="col-12 justify-content-between d-flex pt-3">
@@ -98,7 +98,7 @@ FORM1
 FORM2
 <form action="{{url('/store-profile-two')}}" method="post" class="card p-3"> @csrf
   <div class="col-12">
-  <input type="text" name="email" value="{{ $profile->email ?? '' }}" placeholder="Enter email" class="form-control @error('email') is-invalid @enderror">
+  <input type="text" name="email" value="{{ old('email', $profile->email ?? '') }}" placeholder="Enter email" class="form-control @error('email') is-invalid @enderror">
   @error('email') <span class="text-danger">{{$message}}</span> @enderror
   </div>
   <div class="col-12 justify-content-between d-flex pt-3">
