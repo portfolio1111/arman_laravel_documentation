@@ -12,6 +12,11 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control"> 
+Frontend Validation
+----------------------
+<input type="text" name="mobile" id="mobile" class="form-control my-2" pattern=".{11,11}" title="Please Insert Valid Mobile Number" required>
+
+          
 use Illuminate\Support\Facades\Validator;
 
 $request->validate([
