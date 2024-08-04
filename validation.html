@@ -14,8 +14,8 @@
         <textarea cols="200" rows="20" class="form-control"> 
 Frontend Validation
 ----------------------
-<input type="text" name="mobile" id="mobile" class="form-control my-2" pattern=".{11,11}" title="Please Insert Valid Mobile Number" required>
-
+<input type="text" pattern=".{11,11}" title="Please Insert Valid Mobile Number" required>
+<input type="tel" pattern="\d{11}" required>
           
 use Illuminate\Support\Facades\Validator;
 
