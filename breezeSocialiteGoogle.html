@@ -60,7 +60,13 @@ public function callback($provider){
   try{
     $SocialUser = Socialite::driver($provider)->user();
     if(User::where('email',$SocialUser->getEmail())->exists()){
-      return redirect('/login')->withErrors(['email' => 'This email has uses different method to login']);
+            $user = User::where('email',$SocialUser->getEmail())->first();
+            if($user->password){
+                return redirect('/login')->withErrors(['email' => 'This email has uses different method to login']);
+            }else{
+                Auth::login($user);
+                return redirect('/user');
+            }
     }
      $user = User::where(['provider' => $provider, 'provider_id' => $SocialUser->id ])->first();
      if(!$user){
@@ -91,7 +97,6 @@ public function callback($provider){
     ]);
  
     Auth::login($user);
- 
     return redirect('/dashboard');
 }
 
@@ -121,10 +126,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 
 $fillable
-  username
-  provider
-  provider_id
-  provider_token
+  'username',
+  'provider',
+  'provider_id',
+  'provider_token',
 
 public static function generateUserName($username){
   if($username === null){
