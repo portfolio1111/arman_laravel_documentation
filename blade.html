@@ -14,6 +14,7 @@
         <textarea cols="200" rows="20" class="form-control"> 
 {{ config('app.name') }}
 {{'webDevelopment'==request()->path()?'active':''}}
+{{ request()->is('rooms') || request()->is('rooms/create') ? '' : 'collapsed' }}
 {{Str::limit($country1->name,3)}}
 {{ Auth::user()->name }}
 @php $order = \App\Models\Order::where('course_id', $Course->id)->where('user_id',Auth::user()->id)->first(); @endphp
