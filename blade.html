@@ -171,6 +171,23 @@ update
     </script>
           <form id="submit1"></form>
           
+
+
+
+
+                    <div class="col-md-4 pb-3">
+                        <label for="room_type">Type *</label>
+                        <div class="d-flex mt-3 gap-3">
+                        @foreach($roomtypes as $index => $roomtype)
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="room_type" value="{{$roomtype->id}}" id="room_type{{$roomtype->id}}" required @if($index === 0) checked @endif>
+                          <label class="form-check-label" for="room_type{{$roomtype->id}}">
+                            {{$roomtype->name}}
+                          </label>
+                        </div>
+                        @endforeach
+                        </div>
+                    </div>
         </textarea>
       </div>
     </div>
