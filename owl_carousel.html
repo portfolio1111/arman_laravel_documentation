@@ -15,7 +15,44 @@
     <!-- owl-carousel-css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .owl-nav {
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          transform: translateY(-50%);
+        }
+        .owl-nav button {
+          width:30px !important;
+          height:30px !important;
+          background: #0F6938 !important;
+          border: none !important;
+          font-size: 33px !important;
+          padding: 0px !important;
+          border-radius:100% !important;
+          cursor: pointer !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+        .owl-nav button span{
+          color: white !important;
+        }
+        .owl-nav button.owl-prev {
+          position: absolute;
+          left: 0px;
+        }
+        .owl-nav button.owl-next {
+          position: absolute;
+          right: 0px;
+        }
+        .owl-nav button:hover {
+          background: #B3A032 !important;
+        }
 
+    </style>
     <section>
       <div class="container pt-5">
         <div class="row">
