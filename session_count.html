@@ -12,6 +12,18 @@
     <div class="container pt-4">
       <div class="row">
         <textarea cols="200" rows="20" class="form-control">    
+STORE
+session()->put('get.my_person', $request->person);
+
+GET IN CONTROLLER
+$my_person = session('get.my_person', 0);
+
+GET IN BLADE
+@php $get_my_person = session('get.my_person', 0);  @endphp
+
+REMOVE ALL SESSION
+session()->flush();
+
 CONTROLLER
 $products = Product::get();
 $productCount = count($products);
