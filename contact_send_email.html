@@ -36,7 +36,95 @@ emails/contact.blade.php
 <p>Name : {{$user->name}}</p>
 <p>Email : {{$user->email}}</p>
 <p>Message : {{$user->message}}</p>
-          
+------------------------------------------------------------
+at first config email setup
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=your_email@example.com
+MAIL_FROM_NAME="${APP_NAME}"
+
+php artisan make:mail ContactMail
+
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class ContactMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $data;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->subject('Contact Form Submission')
+                    ->view('emails.contact');
+    }
+}
+
+resources/views/emails/contact.blade.php
+
+<h2>Contact Form Submission</h2>
+<p><strong>Name:</strong> {{ $data['name'] }}</p>
+<p><strong>Email:</strong> {{ $data['email'] }}</p>
+<p><strong>Subject:</strong> {{ $data['subject'] }}</p>
+<p><strong>Message:</strong></p>
+<p>{{ $data['message'] }}</p>
+
+php artisan make:controller ContactController
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
+
+class ContactController extends Controller
+{
+    public function sendContact(Request $request){ 
+        
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+    
+        Mail::to('arman.dev.bd@gmail.com')->send(new ContactMail($data));
+    
+        return back()->with('success', 'Your message has been sent successfully!');
+        
+    }
+}
+    
         </textarea>
       </div>
     </div>
