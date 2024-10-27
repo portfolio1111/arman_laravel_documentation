@@ -124,7 +124,85 @@ class ContactController extends Controller
         
     }
 }
-    
+------------------------------------
+auto reply that email
+
+php artisan make:mail ReplyMail
+
+app/Mail/ReplyMail.php
+
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class ReplyMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $data;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->subject('Thank you for contacting us!')
+                    ->view('emails.reply');
+    }
+}
+
+
+resources/views/emails/reply.blade.php
+
+<h2>Thank you for reaching out, {{ $data['name'] }}!</h2>
+<p>We have received your message:</p>
+<p><em>{{ $data['message'] }}</em></p>
+<p>We will get back to you as soon as possible. If you need immediate assistance, please feel free to reach out again.</p>
+<p>Best Regards,</p>
+<p>Your Company Team</p>
+
+
+ContactController
+
+use App\Mail\ContactMail;
+use App\Mail\ReplyMail;
+use Illuminate\Support\Facades\Mail;
+
+public function sendContact(Request $request)
+{
+    $data = $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email',
+        'subject' => 'required|string',
+        'message' => 'required|string',
+    ]);
+
+    // Send the contact email to the specified address
+    Mail::to('arman.dev.bd@gmail.com')->send(new ContactMail($data));
+
+    // Send a reply email to the user's email address
+    Mail::to($request->email)->send(new ReplyMail($data));
+
+    return back()->with('success', 'Your message has been sent, and we have sent a confirmation email to your address!');
+}
+
         </textarea>
       </div>
     </div>
