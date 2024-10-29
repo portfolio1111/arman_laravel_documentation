@@ -15,6 +15,10 @@
 {{ config('app.name') }}
 {{'webDevelopment'==request()->path()?'active':''}}
 {{ request()->is('rooms') || request()->is('rooms/create') ? '' : 'collapsed' }}
+@foreach($coursecategories as $category)
+<a href="{{url('blog-category',$category->id)}}" class="{{ $category->id == $coursecategory->id ? 'active' : '' }}"><i class="bi bi-arrow-right-circle"></i><span>{{$category->name}}</span></a>
+@endforeach
+
 {{Str::limit($country1->name,3)}}
 {{ Auth::user()->name }}
 @php $order = \App\Models\Order::where('course_id', $Course->id)->where('user_id',Auth::user()->id)->first(); @endphp
