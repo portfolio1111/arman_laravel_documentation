@@ -17,7 +17,12 @@
     RewriteEngine On
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
-    
+ 
+# Use PHP 8.2
+<IfModule mime_module>
+    AddHandler application/x-httpd-alt-php82 .php
+</IfModule>
+   
 <IfModule mod_rewrite.c>
 RewritwEngine On
 RewriteRule ^(.*)$ public/$1 [L]
