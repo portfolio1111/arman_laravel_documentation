@@ -17,6 +17,15 @@ selected table drop first
 change migration file 
 php artisan migrate:rollback --path=/database/migrations/2025_01_15_125326_create_tablename_table.php
 php artisan migrate --path=/database/migrations/2025_01_15_125326_create_tablename_table.php
+
+DROP THE TABLE
+DELETE THE TABLE FROM MIGRATIONS
+CHANGE MIGRATION FILE 
+php artisan migrate
+
+TABLE DROP USING COMMAND
+php artisan tinker
+Schema::dropIfExists('food_categories');
           
 https://www.apachefriends.org/download.html
 https://getcomposer.org/download/
