@@ -104,7 +104,9 @@ if($request->hasFile('image')) {
     $img = Image::make($request->file('image')->path());
     $img->resize(300,300)->save($path.'/'.$imageName);
     $data->image = $imageName;
-}        
+}    
+php.ini search extension=fileinfo remove ; OR
+composer require intervention/image:^2.7 --ignore-platform-req=ext-fileinfo [not recommended]
 ---------------------------------------------------------------------------
 DIFFERENT IMAGE   
 ---------------------------------------------------------------------------        
