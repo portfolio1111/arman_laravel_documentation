@@ -21,6 +21,8 @@
 
 Bangladeshi time
 {{ \Carbon\Carbon::parse($last_order->created_at)->setTimezone('Asia/Dhaka')->format('d M Y - h:i A') }}
+{{ \Carbon\Carbon::createFromFormat('H:i', $notice->time)->format('g:i A') }}
+{{ \Carbon\Carbon::parse($notice->date)->format('d F Y') }}
 
 {{Str::limit($country1->name,3)}}
 {{ Auth::user()->name }}
