@@ -19,9 +19,21 @@
 <meta name="keywords" content="{{ $metaKeywords }}">
 
 xml sitemap
-
+--------------------------------------------------------------
 composer require spatie/laravel-sitemap
 
+.env
+APP_URL=https://mariyamtraders.com
+
+web.php
+use Spatie\Sitemap\SitemapGenerator;
+Route::get('/sitemap', function () {
+    SitemapGenerator::create(config('app.url'))->writeToFile(public_path('sitemap.xml'));
+    return response()->file(public_path('sitemap.xml'));
+});
+
+hit "https://mariyamtraders.com/sitemap"
+--------------------------------------------------------------
 public/sitemap.xml
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
