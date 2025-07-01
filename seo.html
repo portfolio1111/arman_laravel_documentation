@@ -23,7 +23,7 @@ xml sitemap
 composer require spatie/laravel-sitemap
 
 .env
-APP_URL=https://mariyamtraders.com
+APP_URL=https://armansharif.com
 
 web.php
 use Spatie\Sitemap\SitemapGenerator;
@@ -32,7 +32,7 @@ Route::get('/sitemap', function () {
     return response()->file(public_path('sitemap.xml'));
 });
 
-hit "https://mariyamtraders.com/sitemap"
+hit "https://armansharif.com/sitemap"
 --------------------------------------------------------------
 public/sitemap.xml
 use Spatie\Sitemap\Sitemap;
