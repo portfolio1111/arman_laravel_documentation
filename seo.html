@@ -18,7 +18,8 @@
 <meta name="description" content="{{ $metaDescription }}">
 <meta name="keywords" content="{{ $metaKeywords }}">
 
-xml sitemap
+--------------------------------------------------------------
+<img src="" alt="image" lazy="loading">
 --------------------------------------------------------------
 composer require spatie/laravel-sitemap
 
@@ -45,21 +46,13 @@ Sitemap::create()
     ->add(Url::create('/home')->setPriority(1.0))
     ->add(Url::create('/about-us'))
     ->writeToFile(public_path('sitemap.xml'));
-
-
+--------------------------------------------------------------
 public/robots.txt
 User-agent: *
 Disallow: /admin
 User-agent: *
 Disallow: /admin
-Sitemap: http://yourdomain.com/sitemap.xml
-
-
-
-
-<img src="" alt="image" lazy="loading">
-
-
+Sitemap: http://armansharif.com/sitemap.xml
 --------------------
 <head>
 ...
