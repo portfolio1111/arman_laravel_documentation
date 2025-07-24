@@ -47,8 +47,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('users:delete-inactive')->everyMinute();
+        // $schedule->command('users:delete-inactive')->daily();
+        // $schedule->command('users:delete-inactive')->weekly();
+        // $schedule->command('users:delete-inactive')->monthly();
+        // $schedule->command('users:delete-inactive')->yearly();
         // php artisan users:delete-inactive = if i want to mannualy
+        $schedule->command('users:delete-inactive')->everyMinute();
     }
 
     protected function commands(): void
