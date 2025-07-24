@@ -27,7 +27,10 @@ class DeleteInactiveUsers extends Command
 
     public function handle()
     {
+          \Log::info('Scheduled command ran at ' . now());
         $deleted = User::where('status', 'inactive')->delete();
+          
+          \Log::info("Deleted $deleted inactive users.");
         $this->info("Deleted $deleted inactive users.");
     }
 }
