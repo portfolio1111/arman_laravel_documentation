@@ -127,10 +127,14 @@ abc
 
 MULTIPLE GIT ACCOUNT USE
 ----------------------------------------------------------------------------------
-local
-----------------------------------------------------------------------------------
+in terminal
+-----------
 ssh-keygen -t ed25519 -C "arman.hub.bd@gmail.com"
-C:\Users\HP/.ssh/id_ed25519_arman9022
+C:\Users\HP/.ssh/id_ed25519_arman-hub-bd
+
+go to online
+Settings -> SSH and GPG keys ->
+for test, create a new private repo
 now open the file "id_ed25519_arman9022.pub" copy and paste in remote SSH key
 
 create a file "config" in .ssh
@@ -145,6 +149,8 @@ Host arman109022 github.com
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_ed25519_arman109022
 
+[ jeita kaj kora hobe seita first e rakhe hobe ]
+
 git clone 
 git@github.com:arman9022/team_test.git
 git@arman9022:arman9022/team_test.git
@@ -156,9 +162,7 @@ ssh-add .\id_ed25519_arman9022
 ----------------------------------------------------------------------------------
 remote 
 ----------------------------------------------------------------------------------
-go to 
-Settings -> SSH and GPG keys ->
-for test, create a new private repo
+
 
         </textarea>
       </div>
